@@ -1,194 +1,188 @@
-# Fences (Bloques de código en Astro)
+# 🪐 Fences
 
-Vamos a profundizar en los **componentes de Astro**. Si los observas, se
-parecen un poco a Vue: tienes código, HTML y estilos todo en un mismo
-archivo.
+Partimos de la demo anterior **00-boilerplate**. Simplemente copia ese proyecto en una carpeta limpia y ejecuta `npm install` y después `npm run dev`.
 
-En la página principal tenemos un *h1* que dice "Astro". Vamos a cambiarlo por un texto definido en una variable.
+Vamos a adentrarnos en los componentes de Astro. Si te fijas, se parecen un poco a los de Vue: tienes código, HTML y estilos, todo en el mismo archivo.
+
+Probemos algo: vamos a cambiar el _h1_ de la página principal por un texto definido en una variable.
 
 _./src/pages/index.astro_
 
-``` diff
+```diff
 ---
-+ const title = "Hola React Alicante";
++ const title = "¡¡ Hola MiduDev !!";
 ---
 
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
-    </head>
-    <body>
--       <h1>Astro</h1>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+
+	</head>
+	<body>
+-		<h1>Astro</h1>
 +    <h1>{title}</h1>
 ```
 
-¿Qué estamos haciendo aquí?
+> El binding funciona exactamente igual que en React: usamos llaves `{}` para indicar una variable.
 
-- Definimos una variable en typescript.
-- Usamos esa variable en el HTML, para ello el enlace a datos es igual a React, usamos las llaves `{}` para indicarle que evalue ese código.
+Si lo ejecutamos, veremos el nuevo título.
 
-Si ejecutamos el proyecto, veremos el nuevo título:
-
-``` bash
+```bash
 npm run dev
 ```
 
-Y ahora tal vez te preguntes: ¿qué son esas tres rallitas que enjaulan a nuestros código Typescript? Son los **Fences** o **rejas**
+Y ahora quizá te preguntes: ¿qué son los _Fences_?
 
-Son bloques de código que se ejecutan en el servidor. Si estamos en modo
-**SSG (Static Site Generation)**, solo se ejecutan una vez, cuando el
-sitio se genera, es decir en el momento del build, si estuvieras en modo **SSR** se ejecutarían en el servidor cada vez que se fuera a servir la página.
+Son bloques de código que se ejecutan en el servidor. Si estamos en modo **SSG**, solo se ejecutan una vez: cuando se genera el sitio.
 
-Vamos a ver esto de forma más clara: obtendremos un valor aleatorio de una API y lo
-mostraremos en la página.
+Vamos a verlo más claro: vamos a obtener un valor aleatorio desde una API y mostrarlo en la página.
 
-Por ejemplo, existe una API pública que devuelve un dato curioso sobre
-perros. Vamos a usarla.
+Por ejemplo, existe una API pública que devuelve datos fotitos de perros
 
-*./src/pages/index.astro*
+_./src/pages/index.astro_
 
-``` diff
+```diff
 ---
-+ const res = await fetch("https://dogapi.dog/api/v2/facts");
+const title = "Hola Open Commit 2025";
++ const imageError = "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
++ const res = await fetch("https://dog.ceo/api/breeds/image/random");
 + const response = await res.json();
-+ const title = response?.data[0]?.attributes?.body ?? "Ooops, ¿la API no funciona?";
-- const title = "Hola React Alicante";
++ const dogImageUrl = response?.message ?? imageError;
 ---
 ```
 
-Probemos el resultado en el navegador: deberíamos ver un dato curioso
-sobre perros.
+Y actualizamos para mostrar una imagen:
 
-Si hacemos un build y miramos los archivos generados en
-*./dist/index.html*, veremos el dato del perro ya incluido, porque se
-obtuvo en tiempo de compilación.
+_./src/pages/index.astro_
 
-``` bash
+```diff
+	<body>
+     <h1>{title}</h1>
++    <img src={dogImageUrl} alt="Random Dog" style="max-width: 400px; height: auto;"/>
+```
+
+Comprobemos el resultado en el navegador: deberíamos ver un dato curioso sobre perros.
+
+Si hacemos un build y miramos los archivos generados en _./dist/index.html_, veremos que la imagen del perro ya está incluida, porque se obtuvo en el momento de la construcción del sitio.
+
+```bash
 npm run build
 ```
 
-> Si estamos en modo **SSR (Server-Side Rendering)**, este código se
-> ejecutará en cada solicitud del servidor. Nunca se ejecuta en el
-> navegador.
+> Si estamos en modo **SSR**, este código se ejecutará en cada petición al servidor. Nunca se ejecuta en el navegador.
 
-¿Pero podemos ejecutar código en el navegador? ¡Por supuesto! Incluso
-puedes usar **React**, **Vue** o **Svelte** para eso.
+Y ahora te puede venir la siguiente duda... ¿Podemos ejecutar código en el navegador? ¡Por supuesto! Incluso podemos usar React, Vue o Svelte para ello.
 
-Hagamos un ejemplo simple con JavaScript puro: agregaremos un botón que
-obtiene y muestra un dato sobre gatos. El botón se llamará **"Get Cat
-Fact"**.
+Hagamos un ejemplo muy simple en vanilla JavaScript: añadiremos un botón que obtenga y muestre un dato curioso sobre gatos. El botón se llamará **“Get Cat Image”**.
 
-*./src/pages/index.astro*
+_./src/pages/index.astro_
 
-``` diff
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
-    </head>
-    <body>
-        <h1>{title}</h1>
-+       <button id="cat-fact-button">Get Cat Fact</button>
-+       <h2 id="cat-fact"></h2>
-    </body>
+```diff
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>{title}</h1>
+		<img src={dogImageUrl} alt="Random Dog" />
++  <div>
++		  <button id="cat-image-button">Get Cat Image</button>
++  </div>
++  <div>
++		  <img id="cat-image" style="max-width: 400px; height: auto;"/>
++   </div>
+	</body>
 </html>
 
 + <script>
-+ const button = document.getElementById("cat-fact-button");
-+ const factEl = document.getElementById("cat-fact");
++ const button = document.getElementById("cat-image-button");
++ const imageEl = document.getElementById("cat-image") as HTMLImageElement;
 +
-+ if (button && factEl) {
++ if (button && imageEl) {
 +  button.addEventListener("click", async () => {
-+    const res = await fetch("https://catfact.ninja/fact");
++    const res = await fetch("https://api.thecatapi.com/v1/images/search");
 +    const data = await res.json();
-+    factEl.innerText = data.fact;
++    imageEl.src = data[0].url;
 +  });
 +}
 + </script>
 ```
 
-Si ejecutamos el proyecto, veremos que al hacer clic en el botón se
-muestra un dato sobre gatos.
+Si lo ejecutamos, veremos que al hacer clic en el botón aparece un dato curioso sobre gatos.
 
-``` bash
+```bash
 npm run dev
 ```
 
-Ahora podrías preguntarte: ¿cómo depurar esto?
+Ahora quizá te preguntes: ¿cómo puedo depurar esto?
 
-Veamos cómo depurar el código dentro de los **fences** y el código del
-**navegador**.
+Veamos cómo depurar el código dentro de los **fences** y también el código del navegador.
 
-Para depurar **código dentro de fences**:
+Para depurar **código dentro de un fence**:
 
--   Coloca un punto de interrupción dentro del código del fence.
--   Abre una terminal en modo **JavaScript Debug Terminal** y ejecuta:
+- Coloca un punto de ruptura (breakpoint) dentro del bloque de código.
+- Abre una terminal en modo **JavaScript Debug Terminal** y ejecuta:
 
-``` bash
+```bash
 npm run dev
 ```
 
-Cuando ejecutes el servidor, se detendrá en el punto de interrupción y
-podrás depurar.
+Cuando ejecutes el servidor, se detendrá en el punto de ruptura y podrás depurar.
 
-**Importante:** en modo de desarrollo local, cada vez que recargues la
-página, el código del fence se ejecutará de nuevo. Pero esto solo ocurre
-en desarrollo; en producción se ejecuta una sola vez, al compilar.
+Importante: en modo desarrollo local, cada vez que recargues la página el código del fence se ejecutará de nuevo. Pero esto solo ocurre en modo dev — en producción se ejecuta una sola vez, al construir el sitio.
 
-¿Y cómo depuramos el **código del navegador**? Como siempre: usando las
-**DevTools** del navegador.
+¿Y cómo depuramos el **código del navegador**? Como siempre: con las DevTools del navegador.
 
-### Bonus
+**Bonus** Puedes extraer este código a un archivo _ts_, pero tendrás que ajustar un poco el código:
 
-Puedes extraer este código a un archivo *ts*, pero tendrás que ajustar
-un poco el código:
+_./src/pages/cat.ts_
 
-*./src/pages/cat.ts*
-
-``` ts
-async function getCatFact() {
-  const res = await fetch("https://catfact.ninja/fact");
+```ts
+async function getCatImage() {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
   const data = await res.json();
-  return data.fact;
+  return data[0].url;
 }
 
 export const setupCatFactButton = () => {
-  const button = document.getElementById("cat-fact-button");
-  const factEl = document.getElementById("cat-fact");
+  const button = document.getElementById("cat-image-button");
+  const imageEl = document.getElementById("cat-image") as HTMLImageElement;
 
-  if (button && factEl) {
+  if (button && imageEl) {
     button.addEventListener("click", async () => {
-      const fact = await getCatFact();
-      factEl.innerText = fact;
+      const fact = await getCatImage();
+      imageEl.src = fact;
     });
   }
 };
 ```
 
-*./src/pages/index.astro*
+_./src/pages/index.astro_
 
-``` diff
+```diff
 // (...)
 
 <script>
 + import { setupCatFactButton } from "./cat";
 + setupCatFactButton();
--  const button = document.getElementById("cat-fact-button");
--  const factEl = document.getElementById("cat-fact");
+- const button = document.getElementById("cat-image-button");
+- const imageEl = document.getElementById("cat-image") as HTMLImageElement;
 -
--  if (button && factEl) {
--    button.addEventListener("click", async () => {
--      const res = await fetch("https://catfact.ninja/fact");
--      const data = await res.json();
--      factEl.innerText = data.fact;
--    });
--  }
+- if (button && imageEl) {
+-  button.addEventListener("click", async () => {
+-    const res = await fetch("https://api.thecatapi.com/v1/images/search");
+-    const data = await res.json();
+-    imageEl.src = data[0].url;
+-  });
+-}
 </script>
+
 ```

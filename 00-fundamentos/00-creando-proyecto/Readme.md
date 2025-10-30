@@ -2,7 +2,7 @@
 
 ## Prerrequisitos
 
-Nos arrancarnos a desarrollador con Astro, para ello utilizaremos nuestro querido Visual Studio Code y mi recomendación es que te instales el plugin de Astro para VSCode.
+Nos arrancamos a desarrollar con Astro, para ello utilizaremos nuestro querido Visual Studio Code y mi recomendación es que te instales el plugin de Astro para VSCode.
 
 **TODO: añadir pantallazo Astro plugin**
 
@@ -21,11 +21,11 @@ Te pedirá elegir:
 
 - Eligimos una plantilla: en nuestro caso "Minimal / empty" para tener así un punto de partida simple.
 
-- Le decimos que queremos instalar las dependencias de nuestro proyecto, así nos ahorramos un `npm install` :).
+- Le decimos que queremos instalar las dependencias de nuestro proyecto, así nos ahorramos hacer un `npm install` :).
 
 - Ahora toca elegir si queremos que nos cree un repo de Git local, en nuestro caso decimos que si.
 
-Ejecutemos el proyecto:
+Ejecutamos el proyecto:
 
 ```bash
 npm run dev
@@ -76,7 +76,7 @@ npm install --save-dev prettier
 
 Y después el plugin de prettier que formatea ficheros de _astro_
 
-```
+```bash
 npm install prettier-plugin-astro --save-dev
 ```
 
