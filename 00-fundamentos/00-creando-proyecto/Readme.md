@@ -4,7 +4,7 @@
 
 Nos arrancamos a desarrollar con Astro, para ello utilizaremos nuestro querido Visual Studio Code y mi recomendación es que te instales el plugin de Astro para VSCode.
 
-**TODO: añadir pantallazo Astro plugin**
+![Pantallazo con el Plugin oficial de Astro en VSCode](./content/astro-plugin.jpg)
 
 ## Crear un nuevo proyecto Astro
 
@@ -62,7 +62,7 @@ cada página (ojo que esto no es una SPA :)).
 
 ## Prettier
 
-Antes de continuar, vamos a dejar Prettier bien configurado, así se nos puede formatear el código de manera automática.
+Antes de continuar, vamos a dejar Prettier bien configurado, esta herramienta permite formatear el código de manera automática.
 
 Asegurate que ya tienes el plugin de Prettier instalado
 
