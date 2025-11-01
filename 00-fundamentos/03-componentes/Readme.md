@@ -19,9 +19,9 @@ interface Props {
 const { urls } = Astro.props;
 ---
 
-<ul>
-  {urls.map((url) => <li><img src={url} alt="Dog" /></li>)}
-</ul>
+<div>
+  {urls.map((url) => <img src={url} alt="Dog" />)}
+</div>
 ```
 
 Vamos a usar este componente en nuestra página principal.
@@ -30,7 +30,7 @@ En `src/pages/index.astro`, importa el componente y úsalo:
 
 ```diff
 ---
-+ import DogPics from './components/DogPics.astro';
++ import DogPics from '../components/DogPics.astro';
 const title = "¡¡ Hola MiduDev !!";
 const imageError =
   "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
@@ -43,11 +43,17 @@ const dogImageUrls = response?.message ?? [imageError];
 ```diff
   <body>
     <h1>Dog Facts</h1>
--    <ul>
--      {urls.map((url : string) => (
--        <li>{urls}</li>
--      ))}
--    </ul>
+-    <div>
+-      {
+-        dogImageUrls.map((dogImageUrl: string) => (
+-          <img
+-            src={dogImageUrl}
+-            alt="Random Dog"
+-            style="max-width:400px;height:auto;"
+-          />
+-        ))
+-      }
+-    </div>
 +    <DogPics urls={dogImageUrls} />
     <button id="cat-fact-button">Get Cat Fact</button>
     <h2 id="cat-fact"></h2>

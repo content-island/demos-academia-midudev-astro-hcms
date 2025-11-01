@@ -12,7 +12,7 @@ Astro también admite Tailwind y hay un plugin para ello.
 
 ## CSS Global
 
-Vamos a añadir un archivo CSS global en la carpeta `src`.
+Vamos a añadir un archivo CSS global en la carpeta `src`, en el que hacemos un reset ligero y definimos algunos estilos básicos globales.
 
 _./src/styles.css_
 
@@ -102,7 +102,73 @@ const facts: string[] = data.map((item: any) => item.attributes.body);
 ---
 ```
 
-Ahora vamos a darle estilo al componente de hechos de perros.
+Ahora vamos a darle estilo al componente de imagenes de perros:
+
+- Vamos a crear un estilo para un `section` que haga de contenedor de imágenes de perros.
+
+- Vamos a crear una clase `card` para cada imagen de perro, que le dé un borde, un padding y un
+  margen, así como el comportamiento `hover`.
+
+- En la imagen vamos a definir un estilo para que las imagenes se muestren lo más homogéneas
+  posibles.
+
+Añadimos al final del fichero:
+
+_./src/components/DogPics.astro_
+
+```css
+<style>
+  section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+</style>
+```
+
+Y en el markup:
+
+_./src/components/DogPics.astro_
+
+```diff
+---
+interface Props {
+  urls: string[];
+}
+const { urls } = Astro.props;
+---
+
+- <div>
++ <section aria-label="Dog gallery">
+  {urls.map((url) =>
++  <div class="card">
+    <img src={url} alt="Dog" />
++  </div>
+  )}
++ </section>
+- </div>
+```
 
 Agreguemos estos estilos al final del componente Astro de los hechos de
 perros:
@@ -132,5 +198,4 @@ _./src/components/DogFacts.astro_
 </style>
 ```
 
-Si abrimos las herramientas de desarrollo, verás que los estilos están
-limitados al componente.
+Si abrimos las herramientas de desarrollo, verás que estos estilos sólo afectan al componente.
