@@ -13,7 +13,7 @@ const imageError =
   "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
 - const res = await fetch("https://dog.ceo/api/breeds/image/random");
 + const res = await fetch("https://dog.ceo/api/breeds/image/random/5");
-+ const response = await res.json();
+  const response = await res.json();
 - const dogImageUrl = response?.message ?? imageError;
 + const dogImageUrls = response?.message ?? [imageError];
 ---
@@ -30,9 +30,9 @@ Y en el HTML vamos a reemplazar la imagen única por un mapeo de las URLs a elem
 -      style="max-width: 400px; height: auto;"
 -    />
 +    <div>
-+      {dogImageUrls.map((url : string) => (
++      {dogImageUrls.map((dogImageUrl : string) => (
 +        <img
-+          src={url}
++          src={dogImageUrl}
 +          alt="Random Dog"
 +          style="max-width: 200px; height: auto; margin: 10px;"
 +        />
