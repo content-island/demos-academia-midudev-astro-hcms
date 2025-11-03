@@ -1,10 +1,8 @@
 # Layout (Diseño)
 
-Hasta ahora hemos estado trabajando en una sola página.
+Hasta ahora hemos estado trabajando todo el tiempo en la página _index.astro_, pero la mayoría de los sitios web tienen múltiples páginas, y comparten algunos elementos comunes, como el **header** y el **footer**.
 
-Pero la mayoría de los sitios web tienen múltiples páginas, y comparten algunos elementos comunes, como el **header** y el **footer**.
-
-Así que si necesitamos crear otra página, podríamos simplemente crear un nuevo archivo en la carpeta `src/pages`, llamado `about.astro`:
+Así que si necesitamos añadir otra página, podemos simplemente crear un nuevo archivo en la carpeta `src/pages`, y le podemos dar un nombre tal que `about.astro`:
 
 _./src/pages/about.astro_
 
@@ -53,17 +51,17 @@ Podemos probarlo:
 npm run dev
 ```
 
-Pero estamos repitiendo mucho código.
+Esto funciona, pero estamos repitiendo un montón de código.
 
 Las etiquetas `<head>`, `<html>` y `<body>` son las mismas en ambas páginas, y además podríamos incluso tener un header o footer común.
 
 Si empezamos a copiar y pegar, vamos a acabar con un proyecto complicado de mantener.
 
-¿Qué podemos hacer al respecto?  
-Podemos crear un **componente de layout** que envuelva nuestras páginas e incluya los elementos comunes.
+¿Qué podemos hacer al respecto?
 
-Creamos una nueva carpeta en `src` llamada `layouts`,  
-y dentro un nuevo archivo llamado `BaseLayout.astro`.
+Vamos a crear un **componente de layout** que envuelva nuestras páginas e incluya los elementos comunes.
+
+Creamos una nueva carpeta en `src` llamada `layouts`, y dentro un nuevo archivo que nombraremos `BaseLayout.astro`.
 
 > Usaremos _slots_ para definir dónde irá el contenido de cada página, esto es similar a `props.children` en React.
 
@@ -142,7 +140,7 @@ const dogImageUrls = response?.message ?? [imageError];
 </script>
 ```
 
-Y en la página “about”:
+Y en la página “about” hacemos lo mismo:
 
 _./src/pages/about.astro_
 
@@ -169,7 +167,8 @@ _./src/pages/about.astro_
 - </html>
 ```
 
-Solo hay un problema:  
+Solo hay un problema:
+
 el título de la página siempre es **“Astro”**.  
 Podemos solucionarlo pasando una prop `title` al componente de layout.
 
@@ -214,7 +213,7 @@ _./src/pages/about.astro_
     <h1>Página About</h1>
 ```
 
-Ahora podemos ver que ambos títulos son correctos.
+Y así podemos ver que ambos títulos son correctos.
 
 ```bash
 npm run dev

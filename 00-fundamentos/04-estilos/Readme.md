@@ -161,41 +161,17 @@ const { urls } = Astro.props;
 
 - <div>
 + <section aria-label="Dog gallery">
-  {urls.map((url) =>
+  {urls.map((dogImageUrl: string) =>
 +  <div class="card">
-    <img src={url} alt="Dog" />
+      <img
+          src={dogImageUrl}
+          alt="Random Dog"
+-          style="max-width:400px;height:auto;"
+        />
 +  </div>
   )}
 + </section>
 - </div>
-```
-
-Agreguemos estos estilos al final del componente Astro de los hechos de
-perros:
-
-_./src/components/DogFacts.astro_
-
-```astro
-<style>
-  ul {
-    list-style: none;
-    padding: 1rem;
-    border-radius: 8px;
-    background: #f0f4ff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ddd;
-    color: #333;
-    font-size: 1rem;
-  }
-
-  li:last-child {
-    border-bottom: none;
-  }
-</style>
 ```
 
 Si abrimos las herramientas de desarrollo, verás que estos estilos sólo afectan al componente.
