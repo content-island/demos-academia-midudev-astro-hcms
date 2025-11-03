@@ -2,13 +2,13 @@
 
 ¿Qué pasa si queremos mostrar una colección de elementos?
 
-Pues es muy parecido a como lo hacemos con React: Podemos usar la función `map` de JavaScript para transformar una la lista de urls de imágenes en una lista de elementos img de React.
+Pues es muy parecido a como lo hacemos con React: Podemos usar la función `map` de JavaScript para transformar la lista de urls de imágenes en una lista de elementos `img`.
 
 Vamos a modificar la solicitud a la API para que devuelva varias fotos de perritos, en concreto pediremos 5. 
 
 ```diff
 ---
-const title = "¡¡ Hola MiduDev !!";
+const title = "Hello world !";
 const imageError =
   "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
 - const res = await fetch("https://dog.ceo/api/breeds/image/random");
