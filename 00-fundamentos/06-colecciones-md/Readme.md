@@ -1,10 +1,10 @@
 # Colecciones de Contenido y Rutas Dinámicas
 
-Una funcionalidad que ofrece Astro que es muy interesante es como gestiona colecciones de ficheros con Markdown.
+Una funcionalidad que ofrece Astro que es muy interesante es la de poder gestionar colecciones de ficheros Markdown.
 
-Podemos tener en nuestro proyecto ficheros de markdown con contenido y metadatos y generar páginas dinámicas a partir de ellos.
+Esto nos permite tener en nuestro proyecto ficheros de markdown con contenido y metadatos y generar páginas dinámicas a partir de ellos.
 
-Esto es muy útil si quieres mostrar documentación técnica o un blog sencillo.
+Es muy útil si quieres mostrar documentación técnica o un blog sencillo.
 
 ## 1. Configuración de Colecciones de Contenido
 
@@ -41,14 +41,9 @@ export const collections = {
 - Usa el esquema Zod para validar los datos del frontmatter.
 - Garantiza tipado seguro en toda la aplicación
 
-Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que veamos esto más en detalle:
+Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que,veamos esto más en detalle:
 
-Cuando defines un markdown de contenido para Astro, puedes usar el area entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra Zod, que es una librería de validación y tipado de datos muy interesantes (de ahí todas esas entradas que empiezan por z.XXX).
-
----
-
-Las Colecciones de Contenido en Astro proporcionan una forma de organizar y validar tu contenido.  
-Crea una nueva carpeta en `./src/content/` y dentro de ella, un archivo `config.ts`. Este archivo define la estructura de nuestras publicaciones del blog.
+Cuando defines un markdown de contenido para Astro, puedes usar el area entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesantes (de ahí todas esas entradas que empiezan por z.XXX).
 
 ### Estructura del Contenido
 
