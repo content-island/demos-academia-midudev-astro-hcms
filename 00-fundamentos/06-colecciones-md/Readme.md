@@ -63,7 +63,7 @@ Cada archivo markdown incluye un frontmatter que coincide con nuestro esquema.
 
 Puedes obtener el contenido de los archivos desde el repositorio:
 
-https://github.com/content-island/astro-for-react-devs-workshop/tree/main/00-astro-101/06-get-collection/src/content/postCollection
+https://github.com/content-island/demos-academia-midudev-astro-hcms/tree/main/99-recursos/00-posts-md
 
 ## 2. Implementación de Páginas del Blog
 
@@ -174,3 +174,5 @@ const { Content } = await post.render();
 - `getStaticPaths()` genera automáticamente todas las rutas dinámicas (`/blog/[slug]`).
 - `entry.render()` procesa de forma segura el Markdown y devuelve el componente `Content`.
 - Los metadatos se renderizan junto con el contenido de la publicación.
+
+Cómo hemos visto, gestionar colecciones de ficheros Markdown en Astro, está muy bien, pero esto se te puede quedar corto si quieres hacer cosas como que perfiles no técnicos puedan añadir o modificar contenido, o si quieres reaprovecharlo en otras plataformas, para eso, en la siguiente parte de este curso veremos como integrar un Headless CMS con Astro.
