@@ -57,8 +57,12 @@ const dogImageUrls = response?.message ?? [imageError];
 -      }
 -    </div>
 +    <DogPics urls={dogImageUrls} />
-    <button id="cat-fact-button">Get Cat Fact</button>
-    <h2 id="cat-fact"></h2>
+    <div>
+			<button id="cat-image-button">Get Cat Image</button>
+		</div>
+		<div>
+			<img id="cat-image" style="max-width: 400px; height: auto;"/>
+		</div>
   </body>
 ```
 
