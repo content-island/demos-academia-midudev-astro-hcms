@@ -1,6 +1,6 @@
 # Proyecto Real
 
-Hemos estado trabajando con ejemplos sencillos para entender los conceptos básicos de Astro y Content Island, ahora vamos a simular un proyecto real: la idea es que arrancamos con un proyecto a medio construir y nos asignan diferentes casos, así aprovechamos para:
+Hasta ahora hemos estado trabajando con ejemplos sencillos para entender los conceptos básicos de Astro y Content Island, toca simular un proyecto real: la idea es que nos incorporamos a un proyecto a medio construir y nos asignan diferentes casos, así aprovechamos para:
 
 - Ver como aplicar los conceptos aprendidos en un proyecto más grande.
 - Aprender otros conceptos más avanzados como:
@@ -9,7 +9,7 @@ Hemos estado trabajando con ejemplos sencillos para entender los conceptos bási
 
 ## El Sitio
 
-Vamos a construir el siguiente sitio:
+El proyecto sobre el que vamos a trabajar es el que ves en pantalla:
 
 https://stackblitz.com/github/content-island/workshop-final-step
 
@@ -18,11 +18,12 @@ de"](./content/01-full-project.jpg)
 
 Incluye:
 
--   Una página principal que muestra una lista de publicaciones.
--   Una página de post que muestra el contenido de una sola
-    entrada.
--   Una página completa "Acerca de" que presenta la experiencia del
+-   Una página principal que muestra una lista de post.
+-   Una página de post que muestra el contenido de un post.
+-   Una página completa "Acerca de" que presenta la experiencia laboral del
     autor del sitio web.
+
+> Por cierto, si te gustaría aprovechar este proyecto para crear tu propio sitio personal, que sepas que en Content Island pues creaer una cuenta gratuita y tenemos una plantilla lista para usar que puedes clonar y personalizar fácilmente.
 
 Nuestro punto de partida se ve así:
 
@@ -70,8 +71,9 @@ Aquí tienes una visión general de las carpetas principales en la raíz del pro
     flexibles.
 -   **Pages**: Las páginas reales de la aplicación, compuestas usando
     layouts y componentes.
--   **Pods**: Aquí es donde vive la lógica del dominio. Cada pod tiene
-    sus propios componentes, servicios y modelos.
+-   **Pods**: En estos pods encapsulamos islas de funcionalidad, con un dominio acotado y aislado, cada pod tiene sus propios componentes, servicios y modelos.
+
+> A tener cuenta, esto de los pods, no es algo de Astro, es una forma de organizar el código que nos gusta usar para mantener el proyecto ordenado y modular, y puedes aplicarlos en otras tecnologías también.
 
 > Igual te estás preguntando *¿Por qué no ponemos todo dentro de la carpeta **pages**?*\
 > El tema es que Astro trata cada archivo en **pages** como una ruta potencial. Si
@@ -94,6 +96,8 @@ export default defineConfig({
   },
 });
 ```
+
+Más info sobre como instalar Tailwind en Astro aquí: https://docs.astro.build/en/guides/styling/#tailwind
 
 Finalmente, el archivo **tsconfig.json** configura TypeScript. En este
 proyecto, lo usamos para definir alias de rutas, de modo que podamos

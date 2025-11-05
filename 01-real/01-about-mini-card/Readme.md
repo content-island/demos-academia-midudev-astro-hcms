@@ -2,13 +2,15 @@
 
 # HCMS
 
-En este proyecto, vamos a integrar un Headless CMS (HCMS) para gestionar el contenido de nuestro sitio web, de esta manera podremos separar el contenido de la presentación y facilitar la gestión del mismo.
+En este proyecto, vamos a integrar un Headless CMS (HCMS) para gestionar el contenido de nuestro sitio web, de esta manera podremos separar el contenido de la presentación y que sea más fácil poder añadir y modificar información.
 
-En este caso, toda la información ya está disponible en un **proyecto de Content Island**.
+En cuanto a opciones de Headless CMS hay muchas, algunas populares son Strapi, Contentful, Sanity, etc. En este caso vamos a usar **Content Island**, un HCMS muy sencillo de usar.
 
-Vamos a hacer un pequeño recorrido por el modelo y los datos disponibles en ese proyecto:
+Para no aburrirte introduciendo datos, ya tienes disponible toda la información en un **proyecto de Content Island**.
 
-- Tenemos el proyecto abierto, en el tab general puedes ver información genérica así como un token de acceso que nos permitirá conectar nuestro sitio con el HCMS.
+Vamos a hacer un pequeño recorrido y entender el modelo así como los datos disponibles en este proyecto:
+
+- En el tab general puedes ver información genérica así como un token de acceso que nos permitirá conectar nuestro sitio con el HCMS.
 
 - En el tab de model, puedes ver las distintas entidades que se han definido, puedes ver que hay:
   - Un modelo de contenido llamado **MiniBio** que contiene la información del perfil del autor.
@@ -23,6 +25,8 @@ En la parte de contenido:
 - El listado (así podemos ordenarlo).
 - Y por último los posts, donde podemos ver también un campo de tipo markdown donde podemos incluir contenido enriquecido, por ejemplo imágenes, enlaces, etc.
 
+Si tienes curiosidad por saber como se crea el modelo e introducen los datos en este Headless CMS puedes visitar la web de Content Island donde encontrarás video tutoriales y documentación.
+
 # Configuración
 
 Ya que tenemos la información ¿Nos ponemos a explotarla?
@@ -33,7 +37,7 @@ Para leer estos datos, Content Island proporciona una **librería cliente API**.
 npm install @content-island/api-client
 ```
 
-Para tener acceso, necesitamos proporcionar un **token de acceso**. En este caso, usaremos un **token secreto**, que puedes encontrar en la configuración de tu proyecto de Content Island. Creamos un archivo .env en la raíz del proyecto y añadamos el token allí:
+Para poder leer los datos, necesitamos proporcionar un **token de acceso**. En este caso, usaremos un **token secreto**, que puedes encontrar en la configuración de tu proyecto de Content Island. Creamos un archivo .env en la raíz del proyecto y añadamos el token allí:
 
 _/.env_
 
@@ -68,7 +72,7 @@ export default defineConfig({
 });
 ```
 
-Tema interesante aquí:
+A tener en cuenta:
 
 - Al definir la variable de entorno de esta manera, Astro generará automáticamente las definiciones de tipo necesarias para que podamos usar esta variable de entorno con seguridad de tipos en nuestro código.
 
@@ -82,7 +86,7 @@ Tema interesante aquí:
 npm run build
 ```
 
-Ahora, creamos una instancia del cliente, agregamos una carpeta **lib** dentro de **src**, y creamos un archivo llamado **client.ts**.
+Todo bien, pasamos a crear una instancia del cliente de la librería de Content Island, agregamos una carpeta **lib** dentro de **src**, y creamos un archivo llamado **client.ts**.
 
 _./src/lib/client.ts_
 
@@ -108,7 +112,7 @@ La sección del perfil del autor se usa en dos lugares:
 
 Usaremos el **pod** _mini-bio_ y añadiremos funcionalidad para obtener los datos del perfil del autor y usarlos en ambos lugares.
 
-Ya está parte de este trabajo hecho:
+Aquí partimos de que está parte de este trabajo hecho:
 
 - Las páginas usan `pods/mini-bio`.
 - El pod `mini-bio` usa dos componentes: **MiniBioCard** y **MiniBioHero**, dependiendo de las props que reciba.
@@ -254,7 +258,7 @@ _./src/pods/mini-bio/components/mini-bio-card.astro_
 
 ¡ Ahí lo tenemos! 🎉 — Vamos a hacer lo mismo para el componente **MiniBioHero**.
 
-Si navegas a la página _About_ ahora mismo, verás que está vacía. Como ya tenemos la obtención de datos lista, solo necesitamos pasar los datos al componente **MiniBioHero**:
+Si navegas a la página _About_, verás que está vacía. Como ya tenemos la obtención de datos lista, solo necesitamos pasarselos al componente **MiniBioHero**:
 
 _./src/pods/mini-bio/mini-bio.pod.astro_
 
@@ -263,7 +267,7 @@ _./src/pods/mini-bio/mini-bio.pod.astro_
 + {type === 'hero' ? <MiniBioHero content={miniBio} /> : <MiniBioCard content={miniBio} />}
 ```
 
-Y actualizamos el componente _mini-bio-hero.astro_:
+Y actualizar el componente _mini-bio-hero.astro_:
 
 _./src/pods/mini-bio/components/mini-bio-hero.astro_
 
