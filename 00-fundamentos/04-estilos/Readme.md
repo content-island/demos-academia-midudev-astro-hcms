@@ -164,7 +164,7 @@ const { urls } = Astro.props;
       <img
           src={dogImageUrl}
           alt="Random Dog"
--          style="max-width:400px;height:auto;"
+-          style="max-width:200px;height:auto;"
         />
 +  </div>
   )}
