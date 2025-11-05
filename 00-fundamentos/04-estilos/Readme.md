@@ -92,12 +92,13 @@ _./src/pages/index.astro_
 ```diff
 ---
 + import "../styles.css";
-import DogFacts from "../components/DogFact.astro";
-
-const res = await fetch("https://dogapi.dog/api/v2/facts?limit=5");
+import DogPics from "../components/DogPics.astro";
+const title = "Hello World !";
+const imageError =
+  "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
+const res = await fetch("https://dog.ceo/api/breeds/image/random/5");
 const response = await res.json();
-const data = response?.data ?? [];
-const facts: string[] = data.map((item: any) => item.attributes.body);
+const dogImageUrls = response?.message ?? [imageError];
 ---
 ```
 
