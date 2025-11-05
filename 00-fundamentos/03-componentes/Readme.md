@@ -22,7 +22,7 @@ const { urls } = Astro.props;
 ---
 
 <div>
-  {urls.map((url) => <img src={url} alt="Dog" />)}
+  {urls.map((url) => <img src={url} alt="Random Dog" style="max-width:200px;height:auto;" />)}
 </div>
 ```
 
@@ -33,7 +33,7 @@ En `src/pages/index.astro`, importa el componente y úsalo:
 ```diff
 ---
 + import DogPics from '../components/DogPics.astro';
-const title = "¡¡ Hola MiduDev !!";
+const title = "Hola world !!";
 const imageError =
   "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
 const res = await fetch("https://dog.ceo/api/breeds/image/random/5");
@@ -47,11 +47,11 @@ const dogImageUrls = response?.message ?? [imageError];
     <h1>{title}</h1>
 -    <div>
 -      {
--        dogImageUrls.map((dogImageUrl: string) => (
+-        dogImageUrls.map((url: string) => (
 -          <img
--            src={dogImageUrl}
+-            src={url}
 -            alt="Random Dog"
--            style="max-width:400px;height:auto;"
+-            style="max-width:200px;height:auto;"
 -          />
 -        ))
 -      }
