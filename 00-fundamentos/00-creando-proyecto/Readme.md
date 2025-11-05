@@ -8,8 +8,7 @@ Nos arrancamos a desarrollar con Astro, para ello utilizaremos nuestro querido V
 
 ## Crear un nuevo proyecto Astro
 
-Para crear un nuevo proyecto Astro, podemos seguir las instrucciones de su web oficial y usar el siguiente comando en
-tu terminal:
+Para crear un nuevo proyecto Astro, podemos seguir las instrucciones de su web oficial y usar el siguiente comando en tu terminal:
 
 ```bash
 npm create astro@latest
@@ -17,7 +16,7 @@ npm create astro@latest
 
 Te pedirá elegir:
 
-- Carpeta de destino, en mi caso ya estoy en una carpeta vaciá, y elijo ".", si no ponle un nombre de carpeta.
+- Carpeta de destino, en mi caso ya estoy en una carpeta vacía, y elijo ".", si no ponle un nombre de carpeta.
 
 - Eligimos una plantilla: en nuestro caso "Minimal / empty" para tener así un punto de partida simple.
 
@@ -57,14 +56,13 @@ Vamos a hacer un build del proyecto:
 npm run build
 ```
 
-Obtendremos los archivos finales en la carpeta `dist`, con un HTML por
-cada página (ojo que esto no es una SPA :)).
+Obtendremos los archivos finales en la carpeta `dist`, con un HTML por cada página (ojo que esto no es una SPA :)).
 
 ## Prettier
 
 Antes de continuar, vamos a dejar Prettier bien configurado, esta herramienta permite formatear el código de manera automática.
 
-Asegurate que ya tienes el plugin de Prettier instalado
+Asegúrate que ya tienes el plugin de Prettier instalado
 
 **TODO Pantallazo Prettier**
 
@@ -80,8 +78,7 @@ Y después el plugin de prettier que formatea ficheros de _astro_
 npm install prettier-plugin-astro --save-dev
 ```
 
-Y Creamos un archivo `.prettierrc` en la raíz del proyecto, para indicarle a prettire que tiene plugin tiene que usar para los fichero con extensión `.astro`
-contenido:
+Y Creamos un archivo `.prettierrc` en la raíz del proyecto, para indicarle a prettier que tiene que usar para los fichero con extensión `.astro` contenido:
 
 ```json
 {
@@ -97,8 +94,6 @@ contenido:
 }
 ```
 
-**Un tema Importante:** Debes abrir la carpeta del proyecto Astro en una nueva
-ventana de VSCode para que el complemento de Prettier funcione
-correctamente.
+**Un tema Importante:** Debes abrir la carpeta del proyecto Astro en una nueva ventana de VSCode para que el complemento de Prettier funcione correctamente.
 
 Ahora podemos abrir un fichero .astro, desmontarlo un poco y verás que al grabar se aplica el auto formato.
