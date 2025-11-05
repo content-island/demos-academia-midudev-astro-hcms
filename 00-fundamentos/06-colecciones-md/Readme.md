@@ -41,9 +41,9 @@ export const collections = {
 - Usa el esquema Zod para validar los datos del frontmatter.
 - Garantiza tipado seguro en toda la aplicación
 
-Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que,veamos esto más en detalle:
+Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que, veamos esto más en detalle:
 
-Cuando defines un markdown de contenido para Astro, puedes usar el area entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesantes (de ahí todas esas entradas que empiezan por z.XXX).
+Cuando defines un markdown de contenido para Astro, puedes usar el área entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesante (de ahí todas esas entradas que empiezan por z.XXX).
 
 ### Estructura del Contenido
 
@@ -121,8 +121,8 @@ const posts = await getCollection("postCollection");
 
 **Características clave:**
 
-- Usa `getCollection("postCollection")` para obtener todas las publicaciones del blog
-- Genera automáticamente los enlaces usando el `slug` del archivo (el nombre del archivo sirve para identificar el post como fragemento de url) y `data.title` del frontmatter
+- Usa `getCollection("postCollection")` para obtener todas las publicaciones del blog.
+- Genera automáticamente los enlaces usando el `slug` del archivo (el nombre del archivo sirve para identificar el post como fragmento de url) y `data.title` del frontmatter
 
 ### Páginas Dinámicas de Publicaciones
 
@@ -134,7 +134,7 @@ Y ahora viene una parte muy interesante ¿Cómo se generan esa rutas dinámicas?
 
 Si eres fan de las pelis de _Marvel_, y viste _infinity wars_ recordarás que había un momento en el que _Dr. Strange_ veía millones de futuros posibles, y elegía el único en el que ganaban, ... aquí hacemos algo parecido, con _getStaticPaths_ calculamos todas las rutas posibles (una por cada post) y aquí en vez de elegir una, las generamos todas.
 
-Créala dentro de la carpeta `blog`.
+Créarla dentro de la carpeta `blog`.
 
 _./src/pages/blog/[slug].astro_
 
