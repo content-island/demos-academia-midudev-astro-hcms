@@ -5,8 +5,7 @@ Hasta ahora todo lo que hemos generado tenía una pinta muy fea, vamos a ver com
 Si usamos CSS estándar:
 
 - Podemos tener un archivo de CSS global.
-- Podemos tener archivos CSS a nivel de componente (que tienen alcance
-  limitado al componente).
+- Podemos tener archivos CSS a nivel de componente (que tienen alcance limitado al componente).
 
 Astro también admite Tailwind y hay un plugin para ello.
 
@@ -106,11 +105,9 @@ Ahora vamos a darle estilo al componente de imagenes de perros:
 
 - Vamos a crear un estilo para un `section` que haga de contenedor de imágenes de perros.
 
-- Vamos a crear una clase `card` para cada imagen de perro, que le dé un borde, un padding y un
-  margen, así como el comportamiento `hover`.
+- Vamos a crear una clase `card` para cada imagen de perro, que le de un borde, un padding y un margen, así como el comportamiento `hover`.
 
-- En la imagen vamos a definir un estilo para que las imagenes se muestren lo más homogéneas
-  posibles.
+- En la imagen vamos a definir un estilo para que las imágenes se muestren lo más homogéneas posibles.
 
 Añadimos al final del fichero:
 
