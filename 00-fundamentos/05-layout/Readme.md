@@ -127,16 +127,8 @@ const dogImageUrls = response?.message ?? [imageError];
 - </html>
 
 <script>
-  const button = document.getElementById("cat-fact-button");
-  const factEl = document.getElementById("cat-fact");
-
-  if (button && factEl) {
-    button.addEventListener("click", async () => {
-      const res = await fetch("https://catfact.ninja/fact");
-      const data = await res.json();
-      factEl.innerText = data.fact;
-    });
-  }
+  import { setupCatFactButton } from "./cat";
+  setupCatFactButton();
 </script>
 ```
 
