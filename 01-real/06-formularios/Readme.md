@@ -1,10 +1,10 @@
 # Formulario de Server Action con Resend
 
-Bien, ahora que ya jugamos un poco con las **Server Actions**, llevémoslo un paso más allá.  
-Esta vez, vamos a conectar un formulario para enviar correos electrónicos usando [Resend](https://resend.com/).  
-¿La parte genial? No necesitamos instalar ni configurar nada nuevo para las Server Actions — ya lo tenemos todo listo.
+Ya hemos tenido un primer contacto con las **Server Actions**, vamos a seguir explorándolas, esta vez cubriendo un caso muy común, implementar un formulario de contacto, en este caso utilizaremos el servicio [Resend](https://resend.com/) para enviar correos electrónicos de forma sencilla.
 
-El único paquete que agregaremos es **Resend**:
+Como en el ejemplo anterior, dejamos la configuación de server actions lista, sólo tenemos que centrarnos en implementar el formulario.
+
+El único paquete que hacer falta agregar es **Resend**:
 
 ```bash
 npm install resend
@@ -60,7 +60,7 @@ export default defineConfig({
 
 ## Creando nuestra acción
 
-Dentro de _./src/actions/index.ts_, agreguemos una nueva acción que manejará el envío de correos electrónicos:
+Dentro de _./src/actions/index.ts_, agregamos una nueva acción que manejará el envío de correos electrónicos:
 
 ```diff
 +import { Resend } from 'resend';
@@ -106,8 +106,8 @@ export const server = {
 
 ### Desglose rápido:
 
-- Validamos la entrada del formulario con Zod (para asegurarnos de que solo pasen correos válidos)  
-- Llamamos a Resend para enviar el correo  
+- Validamos la entrada del formulario con Zod (para asegurarnos de que solo pasen correos válidos)
+- Llamamos a Resend para enviar el correo
 - Devolvemos una respuesta simple de éxito o error para la interfaz de usuario
 
 ## Conectando el formulario
@@ -150,13 +150,13 @@ _./src/pods/newsletter/components/newsletter-wide.astro_
 
 ### Qué está pasando aquí:
 
-- Importamos el objeto `actions` desde `astro:actions`, lo que nos permite llamar nuestras server actions desde el lado del cliente  
-- Agregamos un *event listener* al evento `submit` del formulario para manejar el envío  
-- Prevenimos el comportamiento por defecto del formulario para controlarlo con JavaScript  
-- Creamos un objeto `FormData` desde el formulario y llamamos a la acción `sendSubscription` con estos datos  
+- Importamos el objeto `actions` desde `astro:actions`, lo que nos permite llamar nuestras server actions desde el lado del cliente
+- Agregamos un _event listener_ al evento `submit` del formulario para manejar el envío
+- Prevenimos el comportamiento por defecto del formulario para controlarlo con JavaScript
+- Creamos un objeto `FormData` desde el formulario y llamamos a la acción `sendSubscription` con estos datos
 - Verificamos el resultado de la acción y, si fue exitoso, reiniciamos el formulario
 
-Astro te permite usar *server actions* directamente en formularios HTML, pero aquí usamos JavaScript para tener más control sobre el proceso de envío y manejar la respuesta adecuadamente.
+Astro te permite usar _server actions_ directamente en formularios HTML, pero aquí usamos JavaScript para tener más control sobre el proceso de envío y manejar la respuesta adecuadamente.
 
 ## Reutilizando la lógica de envío
 
@@ -166,7 +166,7 @@ Primero, crearemos un nuevo archivo llamado `newsletter.business.ts` en la carpe
 _./src/pods/newsletter/newsletter.business.ts_
 
 ```ts
-import { actions } from 'astro:actions';
+import { actions } from "astro:actions";
 
 export const handleSubmit = async (event: Event) => {
   event.preventDefault();
@@ -229,6 +229,6 @@ _./src/pods/newsletter/components/newsletter-mini.astro_
 +</script>
 ```
 
-¡Y eso es todo!  
-Ahora tenemos un formulario de newsletter completamente funcional que usa **Astro Server Actions + Resend** para enviar correos electrónicos realmente.  
-Bastante genial, ¿verdad?
+¡Y eso es todo!
+
+Ahora tenemos un formulario de newsletter completamente funcional que usa **Astro Server Actions + Resend** para enviar correos electrónicos, lo mismo que hemos enviado un correo, podríamos haber utilizado un servicio externo para, por ejemplo, suscribir al usuario a una lista de correos.
