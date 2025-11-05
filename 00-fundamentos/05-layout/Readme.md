@@ -63,7 +63,7 @@ Vamos a crear un **componente de layout** que envuelva nuestras páginas e inclu
 
 Creamos una nueva carpeta en `src` llamada `layouts`, y dentro un nuevo archivo que nombraremos `BaseLayout.astro`.
 
-> Usaremos _slots_ para definir dónde irá el contenido de cada página, esto es similar a `props.children` en React.
+> Usaremos _slots_ para definir donde irá el contenido de cada página, esto es similar a `props.children` en React.
 
 _./src/layouts/BaseLayout.astro_
 
@@ -169,8 +169,7 @@ _./src/pages/about.astro_
 
 Solo hay un problema:
 
-el título de la página siempre es **“Astro”**.  
-Podemos solucionarlo pasando una prop `title` al componente de layout.
+El título de la página siempre es **“Astro”**. Podemos solucionarlo pasando una prop `title` al componente de layout.
 
 _./src/layouts/BaseLayout.astro_
 
