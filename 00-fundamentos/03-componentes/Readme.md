@@ -44,7 +44,7 @@ const dogImageUrls = response?.message ?? [imageError];
 
 ```diff
   <body>
-    <h1>Dog Facts</h1>
+    <h1>{title}</h1>
 -    <div>
 -      {
 -        dogImageUrls.map((dogImageUrl: string) => (
