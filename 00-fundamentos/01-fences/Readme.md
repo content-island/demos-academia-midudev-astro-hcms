@@ -1,10 +1,10 @@
 # 🪐 Fences
 
-Partimos de la demo anterior **00-creando-el-proyecto**. Simplemente copia ese proyecto en una carpeta limpia y ejecuta `npm install` y después `npm run dev`.
+Partimos de la demo anterior **00-creando-proyecto**. Simplemente copia ese proyecto en una carpeta limpia y ejecuta `npm install` y después `npm run dev`.
 
-Toca a adentrarse en los componentes de Astro. Si te fijas, se parecen un poco a los de Vue: donde sueles tener HTML y estilos, todo en el mismo archivo.
+Toca adentrarse en los componentes de Astro. Si te fijas, se parecen un poco a los de Vue: donde sueles tener HTML y estilos, todo en el mismo archivo.
 
-Vamos Probar algo: cambiamos el _h1_ de la página principal por un texto definido en una variable.
+Vamos a probar algo: cambiamos el _h1_ de la página principal por un texto definido en una variable.
 
 _./src/pages/index.astro_
 
@@ -35,7 +35,7 @@ Si lo ejecutamos, veremos el nuevo título.
 npm run dev
 ```
 
-Y ahora quizá te preguntes: ¿qué son los _Fences_?
+Y ahora quizás te preguntes: ¿qué son los _Fences_?
 
 Son bloques de código que se ejecutan en el servidor. Si estamos en modo **SSG** (Static Site Generation), solo se ejecutan una vez: cuando se genera el sitio, es decir en tiempo de build.
 
@@ -116,15 +116,13 @@ _./src/pages/index.astro_
 + </script>
 ```
 
-
-
-Si lo ejecutamos, veremos que al hacer clic en el botón aparece una foto nueva de un lido gatito.
+Si lo ejecutamos, veremos que al hacer click en el botón aparece una foto nueva de un lindo gatito.
 
 ```bash
 npm run dev
 ```
 
-Ahora quizás te preguntes: Código en servidor y código en cliente ¿Cómo depuro esto? Vemaos como:
+Ahora quizás te preguntes: Código en servidor y código en cliente ¿Cómo depuro esto? Veamos como:
 
 Para depurar **código dentro de un fence**:
 
@@ -137,11 +135,11 @@ npm run dev
 
 Cuando ejecutes el servidor, se detendrá en el punto de ruptura y podrás depurar.
 
-Importante: en modo desarrollo local, cada vez que recargues la página el código del fence se ejecutará de nuevo. Pero esto solo ocurre en modo dev — en producción, si estás en modo SSG, se ejecuta una sola vez, al construir el sitio.
+Importante: en modo desarrollo local, cada vez que recargues la página, el código del fence se ejecutará de nuevo. Pero esto solo ocurre en modo dev — en producción, si estás en modo SSG, se ejecuta una sola vez, al construir el sitio.
 
 ¿Y cómo depuramos el **código del navegador**? Como siempre: con las DevTools del navegador.
 
-**Bonus** También Puedes extraer este código a un archivo _ts_,vamos ajustar un poco el código para que sea más limpio:
+**Bonus** También puedes extraer este código a un archivo _ts_, vamos a ajustar un poco el código para que sea más limpio:
 
 _./src/pages/cat.ts_
 
@@ -187,4 +185,4 @@ _./src/pages/index.astro_
 
 ```
 
-En el siguienteo vídeo veremos como trabajar con listas de elementos.
+En el siguiente vídeo veremos como trabajar con listas de elementos.
