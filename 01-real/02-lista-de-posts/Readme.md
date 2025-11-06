@@ -1,6 +1,6 @@
 # Lista de posts
 
-Si navegamos a la página principal, podemos ver que el contenido principal está vació, aquí van la lista de posts.
+Si navegamos a la página home, podemos ver que el contenido principal está vació, aquí van la lista de posts.
 
 ¿De dónde podemos obtener esa lista de posts? De nuestro proyecto en **Content Island**.
 
@@ -50,7 +50,7 @@ export const getAllPosts = async () =>
 
 Esta vez obtenemos la lista de posts ordenada por fecha descendente, y limitamos el número de posts a 6.
 
-toca ahora definir el pod (el UI de entrada para esta funcionalidad rica) lo llamamos  **post-collection.pod.astro** y hacemos una prueba rápida para comprobar que los datos se carguen correctamente.
+Toca ahora definir el component pod (el interfaz de usuario de entrada para esta funcionalidad rica) lo llamamos  **post-collection.pod.astro** y como hemos hecho en pasos anteriores, hacemos una prueba rápida para comprobar que los datos se cargan correctamente.
 
 _./src/pods/post-collection/post-collection.pod.astro_
 
@@ -126,7 +126,7 @@ const readTimeLabel = 'min read';
 ---
 ```
 
-> Un... tema interesante, cuando desarrollamos una página por Astro no es mala idea llevar ciertos literales que están en el HTML a variables en el FrontMatter (en nuestro caso el _readTimeLabel_), de esta forma si en el futuro queremos hacer internacionalización o simplemente cambiar un texto, no tenemos que bucear por el HTML y podermo extraerlo más fácilmente.
+> Un tema interesante, cuando desarrollamos una página con Astro no es mala idea llevar ciertos literales que están en el HTML a variables en el FrontMatter (en nuestro caso el _readTimeLabel_), de esta forma si en el futuro queremos hacer internacionalización o simplemente cambiar un texto, no tenemos que bucear por el HTML y podermo extraerlo más fácilmente.
 
 Y ahora vamos a por el HTML:
 
