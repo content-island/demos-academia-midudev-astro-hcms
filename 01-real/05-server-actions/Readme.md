@@ -2,12 +2,12 @@
 
 En el ejemplo anterior implementamos un botón de "me gusta" con React, pero se nos quedó cojo, almacenabamos el número de "me gusta" en el cliente usando `localStorage`, lo normal es que querramos guardar este dato en el servidor.
 
-Lo ideal sería poder conectar con una base de datos o una API externa, aquí tenemos dos temas:
+Lo ideal sería poder conectar con una base de datos o una API externa, aquí nos surgen dos temas a tener en cuenta:
 
-- Uno, crear una api y backend sólo para esto podría ser matar mosca a cañonazos.
+- Uno, crear una api y backend sólo para esto podría ser matar moscas a cañonazos.
 - Dos, si tiramos de API externa, desde cliente, igual tendríamos que configurar CORS etc...
 
-¿Qué podemos hacer? Tirar de **Server Actions** de Astro, esto hace como de miniservidor o función serverless, que se ejecuta en lado servidor y nos puede servir tanto como para implementar una funcionalidad de backend ligera, como para hacer de proxy (intermedario) y conectar con APIs externas, y ahorranos dolores de cabeza con CORS y demás.
+¿Qué podemos hacer? Tirar de **Server Actions** de Astro, esto hace como de miniservidor o función serverless, que se ejecuta en lado servidor o proveedor de nube y nos puede servir tanto como para implementar una funcionalidad de backend ligera, como para hacer de proxy (intermedario), conectar con APIs externas, y ahorranos dolores de cabeza con CORS y demás.
 
 En este ejemplo, almacenaremos el número de “me gusta” en el servidor mientras seguimos interactuando desde el cliente. En otras palabras, tendremos un botón que, al hacer clic, incrementa el número de “me gusta” y refleja el nuevo valor en pantalla.
 
@@ -52,7 +52,7 @@ export default defineConfig({
 
 Ahora definamos nuestras _server actions_. Aquí Astro usa convención sobre configuración, por lo que las acciones deben vivir dentro de la carpeta `src/actions`.
 
-Comencemos con un modelo:
+Comenzamos por definir un modelo:
 
 _./src/actions/model.ts_
 
@@ -85,7 +85,7 @@ export const addLike = async (slug: string): Promise<number> => {
 };
 ```
 
-Y definimos la propia acción:
+Y definimos la acción en si:
 
 _src/actions/index.ts_
 
@@ -108,7 +108,7 @@ export const server = {
 };
 ```
 
-Vamos a actualizar el componente de React para que interactue con la server action, e importante, introducir el cambio para que cada post tenga su propio contador de "me gusta".
+Vamos a actualizar el componente de React para que interactue con la server action, e introducir el cambio para que cada post tenga su propio contador de "me gusta".
 
 > **Importante:** No olvides compilar el proyecto para que las acciones estén disponibles.
 
