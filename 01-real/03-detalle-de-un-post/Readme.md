@@ -46,7 +46,6 @@ _./src/pages/posts/[slug].astro_
 ---
 import Layout from '#layouts/layout.astro';
 import { getAllPosts } from '#pods/post-collection/post-collection.api';
-import type { Post } from '#pods/post-collection/post-collection.model';
 
 // Generate all possible paths
 export async function getStaticPaths() {
