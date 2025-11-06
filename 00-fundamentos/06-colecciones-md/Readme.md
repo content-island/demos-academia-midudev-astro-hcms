@@ -41,7 +41,7 @@ export const collections = {
 - Usa el esquema Zod para validar los datos del frontmatter.
 - Garantiza tipado seguro en toda la aplicación
 
-Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que, veamos esto más en detalle:
+Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trócola" y tu pones cara de poker, así que, veamos esto más en detalle:
 
 Cuando defines un markdown de contenido para Astro, puedes usar el área entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesante (de ahí todas esas entradas que empiezan por z.XXX).
 
@@ -128,7 +128,7 @@ const posts = await getCollection("postCollection");
 
 Ya tenemos la lista pero si pulsamos en un post nos da un 404, vamos a solucionarlo.
 
-Las páginas individuales del blog se generan usando rutas dinámicas con `[slug].astro`, es decir ese _slug_ es un parametro dinámico.
+Las páginas individuales del blog se generan usando rutas dinámicas con `[slug].astro`, es decir ese _slug_ es un parámetro dinámico.
 
 Y ahora viene una parte muy interesante ¿Cómo se generan esa rutas dinámicas?
 
