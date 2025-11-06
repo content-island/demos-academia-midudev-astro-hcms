@@ -1,6 +1,6 @@
 # 04 Integración con React
 
-Una característica muy importante que mencionamos al arrancar este curso es que Astro puede integrarse fácilmente con tus frameworks favoritos, convirtiéndolo en lo que llamamos "el framework buena gente", esto es muy útil cuando necesitas incoporar funcionalidad rica tu interfaz de usuario.
+Una característica muy importante que mencionamos al arrancar este curso es que Astro puede integrarse fácilmente con tus frameworks favoritos, convirtiéndolo en lo que llamamos "el framework buena gente", esto es muy útil cuando necesitas incoporar funcionalidad rica a tu interfaz de usuario.
 
 Vamos a aprender como funciona esto, utilizaremos React para implementar un ejemplo sencillo (un botón de "me gusta").
 
@@ -47,7 +47,7 @@ export default defineConfig({
 
 Ahora creamos el componente React para nuestro botón de “me gusta”.
 
-Por simplicidad, solo almacenaremos el número de “me gusta” en memoria (usando el  `localStorage` del navegador). En una aplicación real, probablemente, conectaríamos con una API REST y  guardaríamos esta información en una base de datos.
+Por simplicidad, solo almacenaremos el número de “me gusta” en el `localStorage` del navegador. En una aplicación real, probablemente, conectaríamos con una API REST y  guardaríamos esta información en una base de datos.
 
 Agregamos un nuevo archivo llamado **like-button.component.tsx** dentro de la carpeta de componentes del pod de publicación.
 
