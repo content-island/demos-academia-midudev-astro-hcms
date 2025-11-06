@@ -112,7 +112,7 @@ La sección del perfil del autor se usa en dos lugares:
 
 Usaremos el **pod** _mini-bio_ y añadiremos funcionalidad para obtener los datos del perfil del autor y usarlos en ambos lugares.
 
-Aquí partimos de que está parte de este trabajo hecho:
+Aquí partimos de esta parte del trabajo ya hecho:
 
 - Las páginas usan `pods/mini-bio`.
 - El pod `mini-bio` usa dos componentes: **MiniBioCard** y **MiniBioHero**, dependiendo de las props que reciba.
@@ -222,7 +222,7 @@ Le damos caña y comprobamos:
 npm run dev
 ```
 
-¡Funciona! toco mostrar el resto del contenido y ponerlo bonito:
+¡Funciona! toca mostrar el resto del contenido y ponerlo bonito:
 
 _./src/pods/mini-bio/components/mini-bio-card.astro_
 
@@ -258,7 +258,7 @@ _./src/pods/mini-bio/components/mini-bio-card.astro_
 
 ¡ Ahí lo tenemos! 🎉 — Vamos a hacer lo mismo para el componente **MiniBioHero**.
 
-Si navegas a la página _About_, verás que está vacía. Como ya tenemos la obtención de datos lista, solo necesitamos pasarselos al componente **MiniBioHero**:
+Si navegas a la página _About_, verás que está vacía. Como ya tenemos la obtención de datos lista, solo necesitamos pasárselo al componente **MiniBioHero**:
 
 _./src/pods/mini-bio/mini-bio.pod.astro_
 
