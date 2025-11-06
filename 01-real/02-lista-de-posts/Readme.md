@@ -1,8 +1,8 @@
 # Lista de posts
 
-Si navegamos a la página home, podemos ver que el contenido principal está vació, aquí van la lista de posts.
+Si abrimos la página home, podemos ver que el contenido principal está vació, aquí es donde debería de mostrarse la lista de posts.
 
-¿De dónde podemos obtener esa lista de posts? De nuestro proyecto en **Content Island**.
+¿De dónde podemos obtener esa lista? De nuestro proyecto en **Content Island**.
 
 **Cargando la lista**
 
