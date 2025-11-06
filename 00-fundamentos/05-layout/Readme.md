@@ -63,7 +63,7 @@ Vamos a crear un **componente de layout** que envuelva nuestras páginas e inclu
 
 Creamos una nueva carpeta en `src` llamada `layouts`, y dentro un nuevo archivo que nombraremos `BaseLayout.astro`.
 
-> Usaremos _slots_ para definir dónde irá el contenido de cada página, esto es similar a `props.children` en React.
+> Usaremos _slots_ para definir donde irá el contenido de cada página, esto es similar a `props.children` en React.
 
 _./src/layouts/BaseLayout.astro_
 
@@ -127,16 +127,8 @@ const dogImageUrls = response?.message ?? [imageError];
 - </html>
 
 <script>
-  const button = document.getElementById("cat-fact-button");
-  const factEl = document.getElementById("cat-fact");
-
-  if (button && factEl) {
-    button.addEventListener("click", async () => {
-      const res = await fetch("https://catfact.ninja/fact");
-      const data = await res.json();
-      factEl.innerText = data.fact;
-    });
-  }
+  import { setupCatFactButton } from "./cat";
+  setupCatFactButton();
 </script>
 ```
 
@@ -169,8 +161,7 @@ _./src/pages/about.astro_
 
 Solo hay un problema:
 
-el título de la página siempre es **“Astro”**.  
-Podemos solucionarlo pasando una prop `title` al componente de layout.
+El título de la página siempre es **“Astro”**. Podemos solucionarlo pasando una prop `title` al componente de layout.
 
 _./src/layouts/BaseLayout.astro_
 
