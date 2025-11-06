@@ -1,6 +1,6 @@
 # Lista de posts
 
-Si abrimos la página home, podemos ver que el contenido principal está vació, aquí es donde debería de mostrarse la lista de posts.
+Si abrimos la página home, podemos ver que el contenido principal está vacío, aquí es donde debería de mostrarse la lista de posts.
 
 ¿De dónde podemos obtener esa lista? De nuestro proyecto en **Content Island**.
 
@@ -50,7 +50,7 @@ export const getAllPosts = async () =>
 
 Esta vez obtenemos la lista de posts ordenada por fecha descendente, y limitamos el número de posts a 6.
 
-Toca ahora definir el component pod (el interfaz de usuario de entrada para esta funcionalidad rica) lo llamamos  **post-collection.pod.astro** y como hemos hecho en pasos anteriores, hacemos una prueba rápida para comprobar que los datos se cargan correctamente.
+Toca ahora definir el component pod (la interfaz de usuario de entrada para esta funcionalidad rica) lo llamamos  **post-collection.pod.astro** y como hemos hecho en pasos anteriores, hacemos una prueba rápida para comprobar que los datos se cargan correctamente.
 
 _./src/pods/post-collection/post-collection.pod.astro_
 
@@ -105,7 +105,7 @@ Y si ejecutamos el proyecto, veremos la lista de publicaciones (solo los título
 npm run dev
 ```
 
-Hora de darle cario estilándolo: vamos a definir un componente que mostrará una tarjeta de publicación.
+Hora de darle cariño estilándolo: vamos a definir un componente que mostrará una tarjeta de publicación.
 
 Creamos una nueva carpeta dentro del pod `post-collection` llamada **components**, y dentro de ella un nuevo archivo llamado **post-card.astro**.
 
@@ -126,7 +126,7 @@ const readTimeLabel = 'min read';
 ---
 ```
 
-> Un tema interesante, cuando desarrollamos una página con Astro no es mala idea llevar ciertos literales que están en el HTML a variables en el FrontMatter (en nuestro caso el _readTimeLabel_), de esta forma si en el futuro queremos hacer internacionalización o simplemente cambiar un texto, no tenemos que bucear por el HTML y podermo extraerlo más fácilmente.
+> Un tema interesante, cuando desarrollamos una página con Astro no es mala idea llevar ciertos literales que están en el HTML a variables en el FrontMatter (en nuestro caso el _readTimeLabel_), de esta forma si en el futuro queremos hacer internacionalización o simplemente cambiar un texto, no tenemos que bucear por el HTML y podemos extraerlo más fácilmente.
 
 Y ahora vamos a por el HTML:
 
@@ -207,5 +207,5 @@ _./src/pods/post-collection/post-collection.pod.astro_
 </section>
 ```
 
-¡Y listo! 😊  
-Ahora, si hacemos clic en una publicación, obtendremos un **404**, pero eso lo solucionaremos en el siguiente paso, donde mostraremos una publicación individual.
+¡Y listo! 😊
+Ahora, si hacemos click en una publicación, obtendremos un **404**, pero eso lo solucionaremos en el siguiente paso, donde mostraremos una publicación individual.
