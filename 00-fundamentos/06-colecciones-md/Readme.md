@@ -84,7 +84,7 @@ _./src/pages/index.astro_ (adición)
 	<div>
 		<img id="cat-image" style="max-width: 400px; height: auto;"/>
 	</div>
-	<a href="/about">About</a>
+	<a href="/about">Go to about page</a>
 + <a href="/blog">Go to blog page</a>
 ```
 
