@@ -92,7 +92,7 @@ Como puedes ver, hemos añadido @ts-check y la sección de plugins aparece en ro
 export default defineConfig({
   vite: {
 -    plugins:  [tailwindcss()],
-+    plugins: /** @type {any} */ ([tailwindcss()])
++    plugins: /** @type {any} */ ([tailwindcss()]),
   },
 });
 ```
