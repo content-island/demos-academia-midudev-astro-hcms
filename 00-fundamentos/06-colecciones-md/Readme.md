@@ -41,9 +41,9 @@ export const collections = {
 - Usa el esquema Zod para validar los datos del frontmatter.
 - Garantiza tipado seguro en toda la aplicación
 
-Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trocola" y tu pones cara de poker, así que,veamos esto más en detalle:
+Aquí te habrás quedado pensando como cuando vas al mecánico, te dice "Ha sido la junta de la trócola" y tu pones cara de poker, así que, veamos esto más en detalle:
 
-Cuando defines un markdown de contenido para Astro, puedes usar el area entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesantes (de ahí todas esas entradas que empiezan por z.XXX).
+Cuando defines un markdown de contenido para Astro, puedes usar el área entre rejas (las fences) para añadir metadatos, en este caso, puede ser el título del post, una descripción corta del mismo, o una imagen representativa, lo suyo es tipar esto de alguna forma para que no haya errores, y aquí es donde entra en juego `Zod`, que es una librería de validación y tipado de datos muy interesante (de ahí todas esas entradas que empiezan por z.XXX).
 
 ### Estructura del Contenido
 
@@ -76,11 +76,15 @@ Agregamos un enlace al blog en `index.astro`:
 _./src/pages/index.astro_ (adición)
 
 ```diff
-  <h1>Dog Facts</h1>
-  <DogFacts facts={facts} />
-  <button id="cat-fact-button">Get Cat Fact</button>
-  <h2 id="cat-fact"></h2>
-  <a href="/about">Go to about page</a>
+  <h1>{title}</h1>
+	<DogPics urls={dogImageUrls} />
+	<div>
+		<button id="cat-image-button">Get Cat Image</button>
+	</div>
+	<div>
+		<img id="cat-image" style="max-width: 400px; height: auto;"/>
+	</div>
+	<a href="/about">Go to about page</a>
 + <a href="/blog">Go to blog page</a>
 ```
 
@@ -121,14 +125,14 @@ const posts = await getCollection("postCollection");
 
 **Características clave:**
 
-- Usa `getCollection("postCollection")` para obtener todas las publicaciones del blog
-- Genera automáticamente los enlaces usando el `slug` del archivo (el nombre del archivo sirve para identificar el post como fragemento de url) y `data.title` del frontmatter
+- Usa `getCollection("postCollection")` para obtener todas las publicaciones del blog.
+- Genera automáticamente los enlaces usando el `slug` del archivo (el nombre del archivo sirve para identificar el post como fragmento de url) y `data.title` del frontmatter
 
 ### Páginas Dinámicas de Publicaciones
 
 Ya tenemos la lista pero si pulsamos en un post nos da un 404, vamos a solucionarlo.
 
-Las páginas individuales del blog se generan usando rutas dinámicas con `[slug].astro`, es decir ese _slug_ es un parametro dinámico.
+Las páginas individuales del blog se generan usando rutas dinámicas con `[slug].astro`, es decir ese _slug_ es un parámetro dinámico.
 
 Y ahora viene una parte muy interesante ¿Cómo se generan esa rutas dinámicas?
 
