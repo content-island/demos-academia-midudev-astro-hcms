@@ -2,9 +2,9 @@
 
 Una característica muy importante que mencionamos al arrancar este curso es que Astro puede integrarse fácilmente con tus frameworks favoritos, convirtiéndolo en lo que llamamos "el framework buena gente", esto es muy útil cuando necesitas incoporar funcionalidad rica tu interfaz de usuario.
 
-Vamos a aprender como funciona esto, utilizando React para implementar un ejemplo sencillo (un botón de "me gusta").
+Vamos a aprender como funciona esto, utilizaremos React para implementar un ejemplo sencillo (un botón de "me gusta").
 
-> A tener cuenta: hemos elegido un ejemplo simple para que sea más fácil de entender, normalmente querrás realizar este tipo de integraciones para funcionalidades más complejas, y framework más ligeros como Preact o Solid.
+> A tener cuenta: hemos elegido un ejemplo simple para que sea más fácil de entender, normalmente utilizaremos esto para funcionalidades más complejas, y frameworks más ligeros como PReact o Solid.
 
 ¡ Manos a la obra !
 
@@ -47,7 +47,7 @@ export default defineConfig({
 
 Ahora creamos el componente React para nuestro botón de “me gusta”.
 
-Por simplicidad, solo almacenaremos el número de “me gusta” en memoria (usando `localStorage`). En una aplicación real, probablemente querrías guardar esto en una base de datos.
+Por simplicidad, solo almacenaremos el número de “me gusta” en memoria (usando el  `localStorage` del navegador). En una aplicación real, probablemente, conectaríamos con una API REST y  guardaríamos esta información en una base de datos.
 
 Agregamos un nuevo archivo llamado **like-button.component.tsx** dentro de la carpeta de componentes del pod de publicación.
 
@@ -105,7 +105,7 @@ export default LikeButton;
 
 ## Paso 3: Usar el componente React en una página Astro
 
-Por último el componente React dentro de nuestra página Astro.
+Por último usamos el componente React dentro de nuestra página Astro.
 
 _src/pods/post/components/body.astro_
 
