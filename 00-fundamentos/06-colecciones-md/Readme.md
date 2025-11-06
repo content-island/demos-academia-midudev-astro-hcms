@@ -76,11 +76,15 @@ Agregamos un enlace al blog en `index.astro`:
 _./src/pages/index.astro_ (adición)
 
 ```diff
-  <h1>Dog Facts</h1>
-  <DogFacts facts={facts} />
-  <button id="cat-fact-button">Get Cat Fact</button>
-  <h2 id="cat-fact"></h2>
-  <a href="/about">Go to about page</a>
+  <h1>{title}</h1>
+	<DogPics urls={dogImageUrls} />
+	<div>
+		<button id="cat-image-button">Get Cat Image</button>
+	</div>
+	<div>
+		<img id="cat-image" style="max-width: 400px; height: auto;"/>
+	</div>
+	<a href="/about">About</a>
 + <a href="/blog">Go to blog page</a>
 ```
 
