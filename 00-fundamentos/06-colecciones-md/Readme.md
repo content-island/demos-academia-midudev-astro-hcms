@@ -138,7 +138,7 @@ Y ahora viene una parte muy interesante ¿Cómo se generan esa rutas dinámicas?
 
 Si eres fan de las pelis de _Marvel_, y viste _infinity wars_ recordarás que había un momento en el que _Dr. Strange_ veía millones de futuros posibles, y elegía el único en el que ganaban, ... aquí hacemos algo parecido, con _getStaticPaths_ calculamos todas las rutas posibles (una por cada post) y aquí en vez de elegir una, las generamos todas.
 
-Créarla dentro de la carpeta `blog`.
+Créala dentro de la carpeta `blog`.
 
 _./src/pages/blog/[slug].astro_
 
