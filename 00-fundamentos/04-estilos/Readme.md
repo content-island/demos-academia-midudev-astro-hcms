@@ -5,8 +5,7 @@ Hasta ahora todo lo que hemos generado tenía una pinta muy fea, vamos a ver com
 Si usamos CSS estándar:
 
 - Podemos tener un archivo de CSS global.
-- Podemos tener archivos CSS a nivel de componente (que tienen alcance
-  limitado al componente).
+- Podemos tener archivos CSS a nivel de componente (que tienen alcance limitado al componente).
 
 Astro también admite Tailwind y hay un plugin para ello.
 
@@ -93,12 +92,13 @@ _./src/pages/index.astro_
 ```diff
 ---
 + import "../styles.css";
-import DogFacts from "../components/DogFact.astro";
-
-const res = await fetch("https://dogapi.dog/api/v2/facts?limit=5");
+import DogPics from "../components/DogPics.astro";
+const title = "Hello World !";
+const imageError =
+  "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
+const res = await fetch("https://dog.ceo/api/breeds/image/random/5");
 const response = await res.json();
-const data = response?.data ?? [];
-const facts: string[] = data.map((item: any) => item.attributes.body);
+const dogImageUrls = response?.message ?? [imageError];
 ---
 ```
 
@@ -106,11 +106,9 @@ Ahora vamos a darle estilo al componente de imagenes de perros:
 
 - Vamos a crear un estilo para un `section` que haga de contenedor de imágenes de perros.
 
-- Vamos a crear una clase `card` para cada imagen de perro, que le dé un borde, un padding y un
-  margen, así como el comportamiento `hover`.
+- Vamos a crear una clase `card` para cada imagen de perro, que le de un borde, un padding y un margen, así como el comportamiento `hover`.
 
-- En la imagen vamos a definir un estilo para que las imagenes se muestren lo más homogéneas
-  posibles.
+- En la imagen vamos a definir un estilo para que las imágenes se muestren lo más homogéneas posibles.
 
 Añadimos al final del fichero:
 
@@ -166,7 +164,7 @@ const { urls } = Astro.props;
       <img
           src={dogImageUrl}
           alt="Random Dog"
--          style="max-width:400px;height:auto;"
+-          style="max-width:200px;height:auto;"
         />
 +  </div>
   )}
