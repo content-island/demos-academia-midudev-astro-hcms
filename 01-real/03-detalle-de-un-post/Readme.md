@@ -135,7 +135,7 @@ _./src/pages/posts/[slug].astro_
  </Layout>
 ```
 
-> Fijate que aquí estamos referenciando slots que se encuentra definidos en el layout principal.
+> Fijaté que aquí estamos referenciando slots que se encuentran definidos en el layout principal.
 
 ¿Qué tal va quedando esto?
 
@@ -143,7 +143,7 @@ _./src/pages/posts/[slug].astro_
 npm run dev
 ```
 
-Toca ir a por el cogollo del este caso, el contenido de la publicación. Crearemos un componente separado para esto.
+Toca ir a por el cogollo de este caso, el contenido de la publicación. Crearemos un componente separado para esto.
 
 _src/pods/post/post.pod.astro_
 
@@ -211,7 +211,7 @@ const { entry } = Astro.props;
 </Layout>
 ```
 
-Y bueno, se ve alfo, pero nos queda un poco más de trabajo, necestiamos un encabezado y un cuerpo para la publicación, así que creamos dos nuevos componentes, dentro del pod `post` agregando una nueva carpeta llamada **components**.
+Y bueno, se ve algo, pero nos queda un poco más de trabajo, necesitamos un encabezado y un cuerpo para la publicación, así que creamos dos nuevos componentes, dentro del pod `post` agregando una nueva carpeta llamada **components**.
 
 _src/pods/post/components/header.astro_
 
