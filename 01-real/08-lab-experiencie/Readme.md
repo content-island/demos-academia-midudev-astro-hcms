@@ -1,56 +1,56 @@
-# 08 Experience Lab
+# 08 Laboratorio de Experiencia
 
-We’ve learned a lot… Time to get our hands dirty in this hands-on lab!
+Hemos aprendido un montón de cosas... Es hora de prácticar un poco, mi consejo es que en cuanto lea el enunciado de esta demo, le des a la pausa y vayas completando este desafió siguiendo la guía que acompaña al video, después nos pondremos paso a implementarlo para que compruebes que todo ha ido bien.
 
-## Lab Overview
+## Descripción general del laboratorio
 
-If you click on the About page, you’ll see an empty page. Our goal is to display the user’s list of experiences there.
+Si haces clic en la página _About_, verás una página vacía. Nuestro objetivo es mostrar allí la lista de experiencia laboral del usuario.
 
-We’ll use the knowledge gained in the previous modules to implement this feature.
+Usaremos el conocimiento adquirido en los módulos anteriores para implementar esta funcionalidad.
 
-First, we’ll explain the problem, and this time you will complete this hands on lab by yourself, following the steps below.
+## Objetivo
 
-## Goal
-
-Let’s run the project:
+Si ejecutamos el proyecto
 
 ```bash
 npm run dev
 ```
 
-If you click on the About page, you should see an empty page.
+Y hacemos clic en la página _About_, deberías ver una página vacía.
 
-![Empty experience placeholder](./content/empty-experience.jpg)
+![Marcador de posición de experiencia vacía](./content/empty-experience.jpg)
 
-Our goal is to display something like this:
+Nuestro objetivo es mostrar algo como esto:
 
-![Full list of experiences](./content/experience-completed.jpg)
+![Lista completa de experiencias](./content/experience-completed.jpg)
 
-## Loading Data
+Así que mi c
 
-We already have our Blog project connected to Content Island.
+## Cargando datos
 
-Looking at the model, we can see that it includes both a list of experiences and an **Experience** model.
+Ya tenemos nuestro proyecto conectado a **Content Island**.
 
-![Experience and the Experience model](./content/model.jpg)
+Al observar el modelo, podemos ver que incluye tanto una lista de experiencias como un modelo **Experience**.
 
-We’ll start by loading data from Content Island.
+![Experience y el modelo Experience](./content/model.jpg)
 
-We have an _experience-collection_ pod available.
+Vamos a cargar los datos desde Content Island.
 
-Let’s define a model. In Content Island we have:
+Tenemos disponible un pod llamado _experience-collection_.
 
-- An **Experience Section** model that loads all experiences plus the section heading.
-- An **Experience** model that represents a single experience.
+Definimos un modelo. En Content Island tenemos:
 
-In Content Island, you can generate a model that includes nested collections. Let's create a new file and paste the Content Island model definition.
+- Un modelo **Experience Section** que carga todas las experiencias más el encabezado de la sección.
+- Un modelo **Experience** que representa una sola experiencia.
+
+En Content Island puedes generar un modelo que incluya colecciones anidadas. Creamos un nuevo archivo y pegamos la definición del modelo de Content Island (esto lo puedes copiar de la guía).
 
 _./src/pods/experience-collection/experience-collection.model.ts_
 
 ```ts
 export interface Experience {
   id: string;
-  language: 'en';
+  language: "en";
   company: string;
   role: string;
   period: string;
@@ -59,30 +59,30 @@ export interface Experience {
 
 export interface ExperienceSection {
   id: string;
-  language: 'en';
+  language: "en";
   title: string;
   experienceCollection: Experience[];
 }
 ```
 
-Now let’s load the data from Content Island. This time, we’ll indicate that we want to load the nested collection (includeRelatedContent flag set to true).
+Ahora carguemos los datos desde Content Island. Esta vez, indicaremos que queremos cargar la colección anidada (con la bandera **includeRelatedContent** configurada en `true`).
 
-We need to create a new file for the API call, named **experience-collection.api.ts**, inside the experience-collection folder.
+Necesitamos crear un nuevo archivo para la llamada a la API, llamado **experience-collection.api.ts**, dentro de la carpeta _experience-collection_.
 
 _./src/pods/experience-collection/experience-collection.api.ts_
 
 ```ts
-import client from '#lib/client.ts';
-import type { ExperienceSection } from './experience-collection.model';
+import client from "#lib/client.ts";
+import type { ExperienceSection } from "./experience-collection.model";
 
 export const getExperience = async () =>
   await client.getContent<ExperienceSection>({
-    contentType: 'ExperienceSection',
-    includeRelatedContent: true
+    contentType: "ExperienceSection",
+    includeRelatedContent: true,
   });
 ```
 
-Now let’s use it inside our component:
+Ahora lo usaremos dentro de nuestro componente:
 
 _./src/pods/experience-collection/experience-collection.pod.astro_
 
@@ -110,11 +110,11 @@ _./src/pods/experience-collection/experience-collection.pod.astro_
 </section>
 ```
 
-If you now go to the About page, you should see a list of experiences (without design yet).
+Si ahora vas a la página _About_, deberías ver una lista de experiencias (aún sin diseño).
 
-## Adding Styles
+## Agregando estilos
 
-Let’s improve the styles of our component:
+Toca estilar nuestro componente:
 
 ```diff
 <section class="flex flex-1 flex-col gap-10 px-6" aria-labelledby="experience-section-heading">
@@ -150,3 +150,7 @@ Let’s improve the styles of our component:
 +  </div>
 </section>
 ```
+
+Y... ¡ Ya lo tenemos ! ¿Qué te ha parecido?
+
+En el siguiente video, tenemos una demo de "bonus", vamos a ver como funciona el server side rendering y el server streaming.
