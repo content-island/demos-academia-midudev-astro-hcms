@@ -4,7 +4,7 @@ Ya hemos tenido un primera experiencia con las **Server Actions**, vamos a segui
 
 La idea es que cuando un usuario se suscriba a nuestra newsletter que recibamos un correo, esta funcionalidad la tenemos tanto en el aside, como en el footer de nuestra página.
 
-> A tener en cuenta, también podríamos habernos integrado con una API tipo mail chimp para enviar directamente el correo, pero la idea de este ejemplo es cubrir el tipico caso de formulario de contacto.
+> A tener en cuenta, también podríamos habernos integrado con una API tipo mail chimp para enviar directamente el correo, pero la idea de este ejemplo es cubrir el típico caso de formulario de contacto.
 
 Como en el ejemplo anterior ya dejamos la configuración de server actions lista, sólo tenemos que centrarnos en implementar el formulario.
 
@@ -117,8 +117,7 @@ export const server = {
 
 ## Conectando el formulario
 
-Ahora podemos conectar esta acción a nuestros formularios de suscripción.  
-Primero, actualizaremos el componente de newsletter amplio.
+Ahora podemos conectar esta acción a nuestros formularios de suscripción. Primero, actualizaremos el componente de newsletter amplio.
 
 _./src/pods/newsletter/components/newsletter-wide.astro_
 
@@ -155,7 +154,7 @@ _./src/pods/newsletter/components/newsletter-wide.astro_
 
 ### Qué está pasando aquí:
 
-- Importamos el objeto `actions` desde `astro:actions`, lo que nos permite llamar nuestras server actions desde el lado del cliente
+- Importamos el objeto `actions` desde `astro:actions`, lo que nos permite llamar a nuestras server actions desde el lado del cliente
 - Agregamos un _event listener_ al evento `submit` del formulario para manejar el envío
 - Prevenimos el comportamiento por defecto del formulario para controlarlo con JavaScript
 - Creamos un objeto `FormData` desde el formulario y llamamos a la acción `sendSubscription` con estos datos
@@ -165,7 +164,7 @@ Astro te permite usar _server actions_ directamente en formularios HTML, pero aq
 
 ## Reutilizando la lógica de envío
 
-Ahora podemos reutilizar la misma función `handleSubmit` en el otro componente de newsletter.  
+Ahora podemos reutilizar la misma función `handleSubmit` en el otro componente de newsletter.
 Primero, crearemos un nuevo archivo llamado `newsletter.business.ts` en la carpeta `newsletter` para exportar la función.
 
 _./src/pods/newsletter/newsletter.business.ts_
