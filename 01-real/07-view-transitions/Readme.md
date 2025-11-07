@@ -1,8 +1,8 @@
 # 07 Transiciones de Vista
 
-Cuando construimos un proyecto con Astro, nos salimos de paradigma SPA, es decir, tenemos multiples páginas HTML que se cargan de forma independiente.
+Cuando construimos un proyecto con Astro, nos salimos del paradigma SPA, es decir, tenemos multiples páginas HTML que se cargan de forma independiente.
 
-Esto puede resultar en una experiencia de usuario menos fluida, ya que cada cambio de página implica una recarga completa del contenido, lo que vulgarmente se traduce en parpadeos y tiempos de espera, ¿No hay una forma de dar una sensació de navegación más fluida al usuario? La respuesta es Sí y es que los navegadores modernos soportan algo llamado **View Transitions API**, Astro nos ofrece un wrapper sobre esto, que además de hacerlo más sencillo de usar, nos asegura compatibilidad con navegadores que no soportan esta API de forma nativa.
+Esto puede resultar en una experiencia de usuario menos fluida, ya que cada cambio de página implica una recarga completa del contenido, lo que vulgarmente se traduce en parpadeos y tiempos de espera, ¿No hay una forma de dar una sensación de navegación más fluida al usuario? La respuesta es Sí y es que los navegadores modernos soportan algo llamado **View Transitions API**, Astro nos ofrece un wrapper sobre esto, que además de hacerlo más sencillo de usar, nos asegura compatibilidad con navegadores que no soportan esta API de forma nativa.
 
 ¿Vemos como funciona?
 
@@ -23,7 +23,7 @@ _./src/layouts/layout.astro_
 </head>
 ```
 
-Con solo esto, ya podrás notar que al navegar entre páginas hay una pequeña transición, pero vamos a mejorarla un poco.
+Con solo esto, ya podrás notar que al navegar entre páginas hay una pequeña transición, pero... vamos a mejorarla un poco.
 
 ## Paso 2: Implementar las View Transitions
 
