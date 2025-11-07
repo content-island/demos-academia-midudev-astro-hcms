@@ -8,7 +8,7 @@ En el ejemplo anterior implementamos un botón de "me gusta" con React, pero se 
 
 ¿Qué podemos hacer? Usar las Actions de Astro. Estas actúan como un mini servidor o función serverless que se ejecuta en el lado del servidor o en el proveedor de la nube, y pueden servirnos tanto para implementar funcionalidades ligeras de backend como para hacer de proxy (intermediario), conectar con APIs externas y ahorrarnos dolores de cabeza con CORS y otros problemas similares.
 
-En este ejemplo, vamos a almacenar el número de “me gusta” en el servidor mientras seguimos interactuando desde el cliente. En otras palabras, tendremos un botón que, al hacer clic, va a servidor incrementa el número de “me gusta” y refleja el nuevo valor en pantalla.
+En este ejemplo, vamos a almacenar el número de “me gusta” en el servidor mientras seguimos interactuando desde el cliente. En otras palabras, tendremos un botón que, al hacer click, va a servidor incrementa el número de “me gusta” y refleja el nuevo valor en pantalla.
 
 Por simplicidad, mantendremos este valor en memoria del servidor (idealmente, lo guardarías en una base de datos).
 
