@@ -28,9 +28,9 @@ Y ahora calculamos todas las rutas que necesitamos generar usando _getStaticPath
 
 Para hacer esto, necesitamos:
 
-- Obtener la lista de publicaciones desde Content Island.
-- Para cada publicación, devolver un objeto con una propiedad `params` que contenga el slug de la publicación.
-- Luego usar las props para renderizar el detalle de la publicación.
+- Obtener la lista de posts desde Content Island.
+- Para cada publicación, devolver un objeto con una propiedad `params` que contenga el slug de la post.
+- Luego usar las props para renderizar el detalle del post.
 
 Ya tenemos una API y un modelo disponibles en el pod de `post-collection`. En este punto podríamos:
 
@@ -142,7 +142,7 @@ _./src/pages/posts/[slug].astro_
 npm run dev
 ```
 
-Toca ir a por el cogollo de este caso, el contenido de la publicación. Crearemos un componente separado para esto.
+Toca ir a por el cogollo de este caso: el contenido de la publicación. Crearemos un componente separado para esto.
 
 _src/pods/post/post.pod.astro_
 
