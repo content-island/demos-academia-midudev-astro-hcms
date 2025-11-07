@@ -4,7 +4,7 @@ Una característica muy importante que mencionamos al arrancar este curso es que
 
 Vamos a aprender como funciona esto, utilizaremos React para implementar un ejemplo sencillo (un botón de "me gusta").
 
-> A tener cuenta: hemos elegido un ejemplo simple para que sea más fácil de entender, normalmente utilizaremos esto para funcionalidades más complejas, y frameworks más ligeros como PReact o Solid.
+> A tener en cuenta: hemos elegido un ejemplo simple para que sea más fácil de entender, normalmente utilizaremos esto para funcionalidades más complejas, y frameworks más ligeros como PReact o Solid.
 
 ¡ Manos a la obra !
 
@@ -144,7 +144,7 @@ const { entry, likeCount, minReadText } = Astro.props;
   <MarkdownRenderer content={entry.content} />
 ```
 
-> **IMPORTANTE:** `client:load` permite que el componente se ejecute en el lado del cliente. Prueba eliminar `client:load` y ver qué sucede al hacer clic en el botón.
+> **IMPORTANTE:** `client:load` permite que el componente se ejecute en el lado del cliente. Prueba a eliminar `client:load` y ver qué sucede al hacer click en el botón.
 
 ¿Lo probamos?
 
