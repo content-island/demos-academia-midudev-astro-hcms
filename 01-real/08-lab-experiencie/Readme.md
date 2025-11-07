@@ -1,6 +1,6 @@
 # 08 Laboratorio de Experiencia
 
-Hemos aprendido un montón de cosas... Es hora de prácticar un poco, mi consejo es que en cuanto lea el enunciado de esta demo, le des a la pausa y vayas completando este desafió siguiendo la guía que acompaña al video, después nos pondremos paso a implementarlo para que compruebes que todo ha ido bien.
+Hemos aprendido un montón de cosas... Es hora de prácticar un poco, mi consejo es que en cuando lea el enunciado de esta demo, le des a la pausa y vayas completando este desafió siguiendo la guía que acompaña al video, después nos pondremos paso a implementarlo para que compruebes que todo ha ido bien.
 
 ## Descripción general del laboratorio
 
@@ -149,6 +149,28 @@ Toca estilar nuestro componente:
 +    }
 +  </div>
 </section>
+```
+
+```astro
+  <div class="pl-4">
+    {
+      experienceContent.experienceCollection.map(exp => (
+        <div class="relative flex items-baseline gap-4 before:absolute before:top-5 before:left-[5px] before:z-[-1] before:h-full before:w-0.5 before:bg-gray-300 last:before:hidden">
+          <div class="flex flex-col">
+            <div class="bg-primary-700 dark:border-primary-50 dark:shadow-primary-50 h-3 w-3 rounded-full shadow-[0_0_0_4px] shadow-white dark:shadow-[0_0_0_5px]" />
+          </div>
+
+          <article class="pb-10">
+            <h3 class="text-primary-700 text-lg font-bold">
+              {exp.company} – {exp.role}
+            </h3>
+            <span class="text-tbase-500/90 mb-2 block text-sm font-semibold">{exp.period}</span>
+            <p>{exp.description}</p>
+          </article>
+        </div>
+      ))
+    }
+  </div>
 ```
 
 Y... ¡ Ya lo tenemos ! ¿Qué te ha parecido?
