@@ -1,19 +1,22 @@
 # Server Actions
 
-En el ejemplo anterior implementamos un botón de "me gusta" con React, pero se nos quedó cojo, almacenabamos el número de "me gusta" en el cliente usando `localStorage`, lo normal es que querramos guardar este dato en el servidor.
-
-Lo ideal sería poder conectar con una base de datos o una API externa, aquí nos surgen dos temas a tener en cuenta:
+En el ejemplo anterior implementamos un botón de "me gusta" con React, pero se nos quedó un poco cojo, ya que almacenabamos el número de "me gusta" en el cliente usando `localStorage`, lo ideal sería poder conectar con una base de datos o una API externa, aquí nos surgen dos temas a tener en cuenta:
 
 - Uno, crear una api y backend sólo para esto podría ser matar moscas a cañonazos.
+
 - Dos, si tiramos de API externa, desde cliente, igual tendríamos que configurar CORS etc...
 
-¿Qué podemos hacer? Tirar de **Server Actions** de Astro, esto hace como de miniservidor o función serverless, que se ejecuta en lado servidor o proveedor de nube y nos puede servir tanto como para implementar una funcionalidad de backend ligera, como para hacer de proxy (intermedario), conectar con APIs externas, y ahorranos dolores de cabeza con CORS y demás.
+¿Qué podemos hacer? Usar las Actions de Astro. Estas actúan como un mini servidor o función serverless que se ejecuta en el lado del servidor o en el proveedor de la nube, y pueden servirnos tanto para implementar funcionalidades ligeras de backend como para hacer de proxy (intermediario), conectar con APIs externas y ahorrarnos dolores de cabeza con CORS y otros problemas similares.
 
-En este ejemplo, almacenaremos el número de “me gusta” en el servidor mientras seguimos interactuando desde el cliente. En otras palabras, tendremos un botón que, al hacer clic, incrementa el número de “me gusta” y refleja el nuevo valor en pantalla.
+En este ejemplo, vamos a almacenar el número de “me gusta” en el servidor mientras seguimos interactuando desde el cliente. En otras palabras, tendremos un botón que, al hacer clic, va a servidor incrementa el número de “me gusta” y refleja el nuevo valor en pantalla.
 
-Por simplicidad, mantendremos este valor en memoria del servidor (idealmente, lo guardarías en una base de datos.
+Por simplicidad, mantendremos este valor en memoria del servidor (idealmente, lo guardarías en una base de datos).
 
-Primero, configuremos las _server actions_ actualizando el adaptador de Astro (modificaremos `astro.config.mjs`). Aquí puedes elegir Node.js, Vercel, Netlify o Deno. Ten en cuenta que, una vez que habilites un adaptador como estos, Astro dejará de generar un sitio 100% estático: tendrás que desplegar en una plataforma que soporte el _runtime_ elegido.
+Nos arrancamos.
+
+Primero, configuramos las _actions_ añadiendo un adaptador a nuestro proyecto Astro (modificamos el `astro.config.mjs`), y aquí puedes elegir Node.js, Vercel, Netlify o Deno, en nuestro caso elegimos nodejs lo que nos va a permitir no atarnos a un proveedor concreto de cloud.
+
+Ten en cuenta que, una vez que habilites un adaptador como estos, Astro dejará de generar un sitio 100% estático: tendrás que desplegar en una plataforma que soporte el _runtime_ elegido.
 
 ```bash
 npm install @astrojs/node
@@ -50,7 +53,9 @@ export default defineConfig({
 });
 ```
 
-Ahora definamos nuestras _server actions_. Aquí Astro usa convención sobre configuración, por lo que las acciones deben vivir dentro de la carpeta `src/actions`.
+> El modo standalone crea su propio servidor Node, mientras que embedded se integra en un servidor Node existente
+
+Pasamos a definir nuestras actions. Astro aplica el principio de convención sobre configuración, por lo que las acciones deben ubicarse dentro de la carpeta src/actions.
 
 Comenzamos por definir un modelo:
 
