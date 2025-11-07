@@ -1,5 +1,232 @@
 # Server Streaming
 
+Hasta ahora hemos estado trabajando en modo SSG (Static Site Generation), es decir ejecutabamos el código en tiempo de build y generabamos un sitio estático.
+
+Pero Astro nos ofrece también soporte a Server Side Rendering (es decir que una página se genere cada vez que la pidamos en servidor), y lo que es mejor... módo hibrido, esto es:
+
+- Puedes elegir que unas páginas se generen con SSG.
+- Otras que se generen cada vez que se pidan con SSR.
+
+Esto te permite ajustar el rendimiento, para las páginas que no lo necesiten tiras de estático, y para las que necesiten datos en tiempo real de server side rendering.
+
+Y otro tema interesante es que en Server Side Rendering puedes darle prioridad a servir antes ciertas partes de la aplicación (es lo que se llama server streaming).
+
+Vamos a poner toda esta teoría en práctica.
+
+Lo primero que vamos a hacer es crear un nuevo proyecto, esto es una oportunidad estupend para que práctiques, intenta crear un proyecto en blanco por tu cuenta, repasa las guías de los primeros módulos, dale a la pausa e intentalo.
+
+Vamos con la solución.
+
+Para crear el nuevo proyecto en astro ejecutamos:
+
+```bash
+npm create astro@latest
+```
+
+Queremos que algunas páginas tiren de SSR, para ello tenemos que añadir un adaptador de servidor, vamos a elegir el de nodejs ¿Te acuerdas como hicimos eso? Dale a la pausa e intentalo.
+
+instalamos el adaptador de nodejs para astro:
+
+```bash
+npm install @astrojs/node
+```
+
+Y lo añadimos al `astro.config.mjs`:
+
+_./astro.config.mjs_
+
+```diff
+// @ts-check
+import { defineConfig } from 'astro/config';
++ import node from '@astrojs/node';
+
+// https://astro.build/config
+export default defineConfig({
++  adapter: node({
++    mode: 'standalone',
++  }),
+});
+```
+
+Vamos ahora a cargar las imagenes de gatos y perros en la página principal, vamos a meterlo en un fichero de API para que sea más fácil de usar (crearemos esta vez una carpeta `api` debajo de `src`y un fichero que se llame _animal.api.ts_) ¿Te acuerdas como se hacía? Dale a la pausa e intentalo.
+
+_./src/api/animal.api.ts_
+
+```ts
+export async function getRandomDogImage(): Promise<string> {
+  const imageError =
+    "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
+
+  const res = await fetch("https://dog.ceo/api/breeds/image/random");
+  const response: { message?: string } = await res.json();
+  return response?.message ?? imageError;
+}
+
+export async function getRandomCatImage(): Promise<string> {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const data: { url: string }[] = await res.json();
+  return data[0].url;
+}
+```
+
+Y vamos a mostrarlas
+
+_./src/index.astro_
+
+```astro
+---
+const dogImage = await getRandomDogImage();
+const catImage = await getRandomCatImage();
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Dog and Cat Images</title>
+  </head>
+  <body>
+    <h1>🐶 Random Dog Image</h1>
+    <img
+      src={dogImage}
+      style="max-width: 400px"
+    />
+
+    <h1>🐱 Random Cat Image</h1>
+    <img
+      src={catImage}
+      style="max-width: 400px"
+    />
+  </body>
+</html>
+```
+
+Si hacemos un build podemos ver como se genera la página en HTML.
+
+Vamos añadir una línea de código indicándole que la página se genere en servidor cada vez que se haga una petición (SSR).
+
+_./src/index.astro_
+
+```diff
+---
++ export const prerender = false;
+const dogImage = await getRandomDogImage();
+const catImage = await getRandomCatImage();
+---
+```
+
+Si ahora hacemos un build, ya no tenemos la página HTML, pregenerada, si queremos ver la página tenemos que irnos a:`dist/server/pages/_image.astro.mjs`.
+
+Ahora vamos simular un delay en la carga de la foto de los gatos (es normal, los gatos van a su bola)
+
+```diff
+export async function getRandomCatImage(): Promise<string> {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const data: { url: string }[] = await res.json();
+
++  // ⏳ Add a 5-second delay
++  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  return data[0].url;
+}
+```
+
+Si recargamos la página ¿Qué pasa? Pues que tarda un rato en cargarse, hasta que el servicio más lento no haya terminado no tenemos nada que hacer, esto puede llevar a problema porque hay veces que tenemos fragmentos de páginas que son más priotarios.
+
+¿Qué podemos hacer? Implementar server streaming.
+
+Vamos a crear un componente perro y otro componente gato, los vamos a crear debajo de `./src/components/dog.astro` y `./src/components/cat.astro`, y los usaremos en index, si te animas a darle a la pausa e implementarlo, adelante :).ñ
+
+_./src/components/dog.astro_
+
+```astro
+---
+import {getRandomDogImage} from '../api/animal.api';
+const dogImage = await getRandomDogImage();
+---
+<h1>🐶 Random Dog Image</h1>
+<img
+  src={dogImage}
+  style="max-width: 400px"
+/>
+```
+
+_./src/components/cat.astro_
+
+```astro
+---
+import { getRandomCatImage} from '../api/animal.api';
+const catImage = await getRandomCatImage();
+---
+
+<h1>🐱 Random Cat Image</h1>
+<img
+  src={catImage}
+  style="max-width: 400px"
+/>
+```
+
+Lo usamos en la página.
+
+_./src/index.astro_
+
+```diff
+---
+export const prerender = false;
++ import Dog from '../components/dog.astro';
++ import Cat from '../components/cat.astro';
+- import {getRandomDogImage, getRandomCatImage} from '../api/animal.api';
+- const dogImage = await getRandomDogImage();
+- const catImage = await getRandomCatImage();
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Dog and Cat Images</title>
+  </head>
+  <body>
++    <Dog/>
++    <Cat/>
+-    <h1>🐶 Random Dog Image</h1>
+-    <img
+-      src={dogImage}
+-      style="max-width: 400px"
+-    />
+-
+-    <h1>🐱 Random Cat Image</h1>
+-    <img
+-      src={catImage}
+-      style="max-width: 400px"
+-    />
+  </body>
+</html>
+```
+
+Si probamos... resulta que ya no bloquea, y es que Astro intenta hacer streaming por defecto, aunque hay casos en los que puede fallar, si queremos asegurarnos, podemos usar la directiva `server:defer`, y además indicarle que si no está el componente listo que muestre un mensaje de cargando...
+
+Vamos ahora decirle a Astro: oye no me bloquees el renderizado del HTML principal esperando a que `Cat` termine de renderizarse en el servidor, envíame la página al navegador lo antes posible y luego inyecta el contenido de `Cat` cuando esté listo.
+
+```diff
+    <Dog/>
+-    <Cat/>
++    <Cat server:defer>
++			<div slot="fallback">
++  			<span style="color: green; font-size: 2.5rem;">🐱 Loading cat fact...</span>
++			</div>
++		</Cat>
+  </body>
+```
+
+Vamos ver que pasa:
+
+Y marcamos el de gato como defer.
+
+Ahora si refrescamos la página, tenemos enseguida la foto del perro, y la del gato se sirve despues.
+
+Y podemos añadir un mensaje de cargando.
+
+---
+
 Si estamos en modo SSR, cuando pedimos una página, esta se genera en el servidor y se envía al usuario en un sólo paquete.
 
 ¿ Qué pasa si tenemos una páigna rica que carga de diferentes fuentes de datos? Puede que uno de los fragmentos tarde más en llegar que otro, lo que puede hacer que la página tarde en cargarse, y muchas veces lo que nos interesa es que la página se cargue lo más rápido posible.
