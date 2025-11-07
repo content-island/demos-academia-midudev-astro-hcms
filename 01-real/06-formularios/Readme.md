@@ -1,17 +1,23 @@
 # Formulario de Server Action con Resend
 
-Ya hemos tenido un primer contacto con las **Server Actions**, vamos a seguir explorándolas, esta vez cubriendo un caso muy común, implementar un formulario de contacto, en este caso utilizaremos el servicio [Resend](https://resend.com/) para enviar correos electrónicos de forma sencilla.
+Ya hemos tenido un primera experiencia con las **Server Actions**, vamos a seguir explorándolas, esta vez cubriendo un caso muy común, implementar un formulario de contacto, en esta ocasión utilizaremos el servicio [Resend](https://resend.com/) para enviar correos electrónicos de forma sencilla.
 
-Como en el ejemplo anterior, dejamos la configuación de server actions lista, sólo tenemos que centrarnos en implementar el formulario.
+La idea es que cuando un usuario se suscriba a nuestra newsletter que recibamos un correo, esta funcionalidad la tenemos tanto en el aside, como en el footer de nuestra página.
 
-El único paquete que hacer falta agregar es **Resend**:
+> A tener en cuenta, también podríamos habernos integrado con una API tipo mail chimp para enviar directamente el correo, pero la idea de este ejemplo es cubrir el tipico caso de formulario de contacto.
+
+Como en el ejemplo anterior ya dejamos la configuración de server actions lista, sólo tenemos que centrarnos en implementar el formulario.
+
+Para enviar correos, podemos utilizar un sinfin de proveedores, en nuestro caso elegimos **Resend** que ofrece un plan gratuito.
+
+El único paquete que hacer falta agregar es la librería de **Resend**:
 
 ```bash
 npm install resend
 ```
 
-A continuación, necesitamos configurar una cuenta en [Resend](https://resend.com/) para obtener una clave API.  
-No te preocupes por la configuración del dominio; para este ejemplo, usaremos `onboarding@resend.dev` para enviar correos.  
+A continuación, necesitamos configurar una cuenta en [Resend](https://resend.com/) para obtener una clave API, puedes crear una con el plan gratuito y para este ejemplo no te preocupes por la configuración del dominio; para este ejemplo, usaremos `onboarding@resend.dev` para enviar correos (si más adelante quieres un servicio de este tipo asociado a tu dominio, tendrás que validarlo).
+
 Una vez que tengas la clave, agrégala a tus variables de entorno en el archivo `.env`.
 
 _.env_
@@ -22,7 +28,7 @@ TO_EMAIL=recipient_email_here
 RESEND_API_KEY=your_resend_api_key_here
 ```
 
-Y también agrégala en tu archivo `astro.config.mjs`:
+Y también añade la configuración en tu archivo `astro.config.mjs`:
 
 ```diff
 export default defineConfig({
@@ -101,7 +107,6 @@ export const server = {
 +    },
 +  }),
 };
-
 ```
 
 ### Desglose rápido:
@@ -229,6 +234,19 @@ _./src/pods/newsletter/components/newsletter-mini.astro_
 +</script>
 ```
 
+```ts
+<script>
+  import { handleSubmit } from '../newsletter.business';
+  const form = document.getElementById('newsletter-form-mini');
+
+  if (form && form instanceof HTMLFormElement) {
+    form.addEventListener('submit', e => handleSubmit(e));
+  }
+</script>
+````
+
 ¡Y eso es todo!
 
 Ahora tenemos un formulario de newsletter completamente funcional que usa **Astro Server Actions + Resend** para enviar correos electrónicos, lo mismo que hemos enviado un correo, podríamos haber utilizado un servicio externo para, por ejemplo, suscribir al usuario a una lista de correos.
+
+En el próximo video vamos a ver como añadir transiciones a la navegación entre páginas.
