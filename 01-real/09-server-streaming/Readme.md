@@ -95,6 +95,8 @@ _./src/index.astro_
 
 ```astro
 ---
+import {getRandomDogImage, getRandomCatImage} from '../animal.api.ts';
+
 const dogImage = await getRandomDogImage();
 const catImage = await getRandomCatImage();
 ---
@@ -135,7 +137,7 @@ const catImage = await getRandomCatImage();
 ```
 
 Si volvemos a hacer el build, ya no se generará un HTML estático:
-Astro creará un módulo en `dist/server/pages/_image.astro` que renderiza el HTML en cada petición.
+Astro creará un módulo en `dist/server/pages/_index.astro` que renderiza el HTML en cada petición.
 
 ## Simulando una respuesta lenta
 
