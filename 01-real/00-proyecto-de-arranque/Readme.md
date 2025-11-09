@@ -23,7 +23,7 @@ Incluye:
 -   Una página completa "Acerca de" que presenta la experiencia laboral del
     autor del sitio web.
 
-> Por cierto, si te gustaría aprovechar este proyecto para crear tu propio sitio personal, que sepas que en Content Island pues creaer una cuenta gratuita y tenemos una plantilla lista para usar que puedes clonar y personalizar fácilmente.
+> Por cierto, si te gustaría aprovechar este proyecto para crear tu propio sitio personal, que sepas que en Content Island puedes crearte una cuenta gratuita y tenemos una plantilla lista para usar que puedes clonar y personalizar fácilmente.
 
 Nuestro punto de partida se ve así:
 
@@ -39,7 +39,7 @@ https://stackblitz.com/github/content-island/workshop-final-step
 
 ## Configuración
 
-Vamos a  explorar la estructura del proyecto.
+Vamos a explorar la estructura del proyecto.
 
 Clonamos nuestro proyecto inicial, puedes encontrarlo en esta URL:
 
@@ -73,7 +73,7 @@ Aquí tienes una visión general de las carpetas principales en la raíz del pro
     layouts y componentes.
 -   **Pods**: En estos pods encapsulamos islas de funcionalidad, con un dominio acotado y aislado, cada pod tiene sus propios componentes, servicios y modelos.
 
-> A tener cuenta, esto de los pods, no es algo de Astro, es una forma de organizar el código que nos gusta usar para mantener el proyecto ordenado y modular, y puedes aplicarlos en otras tecnologías también.
+> A tener en cuenta, esto de los pods, no es algo de Astro, es una forma de organizar el código que nos gusta usar para mantener el proyecto ordenado y modular, y puedes aplicarlos en otras tecnologías también.
 
 > Igual te estás preguntando *¿Por qué no ponemos todo dentro de la carpeta **pages**?*\
 > El tema es que Astro trata cada archivo en **pages** como una ruta potencial. Si
@@ -92,7 +92,7 @@ Como puedes ver, hemos añadido @ts-check y la sección de plugins aparece en ro
 export default defineConfig({
   vite: {
 -    plugins:  [tailwindcss()],
-+    plugins: /** @type {any} */ ([tailwindcss()])
++    plugins: /** @type {any} */ ([tailwindcss()]),
   },
 });
 ```
@@ -105,6 +105,4 @@ importar módulos con el prefijo `#/` en lugar de rutas relativas largas.
 
 # Ejemplos
 
-¿Qué te parece? ¿Tienes ganas de hincarle el diente? Pues nos ponemos  con los ejemplos; empezaremos con algo simple y lo iremos
-evolucionando (primero actualizaremos un componente, luego un pod,
-después una página, y así sucesivamente...).
+¿Qué te parece? ¿Tienes ganas de hincarle el diente? Pues nos ponemos con los ejemplos; empezaremos con algo simple y lo iremos evolucionando (primero actualizaremos un componente, luego un pod, después una página, y así sucesivamente...).
