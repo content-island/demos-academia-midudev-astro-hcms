@@ -29,7 +29,7 @@ Y ahora calculamos todas las rutas que necesitamos generar usando _getStaticPath
 Para hacer esto, necesitamos:
 
 - Obtener la lista de posts desde Content Island.
-- Para cada publicación, devolver un objeto con una propiedad `params` que contenga el slug de la post.
+- Para cada publicación, devolver un objeto con una propiedad `params` que contenga el slug del post.
 - Luego usar las props para renderizar el detalle del post.
 
 Ya tenemos una API y un modelo disponibles en el pod de `post-collection`. En este punto podríamos:
@@ -46,7 +46,6 @@ _./src/pages/posts/[slug].astro_
 ---
 import Layout from '#layouts/layout.astro';
 import { getAllPosts } from '#pods/post-collection/post-collection.api';
-import type { Post } from '#pods/post-collection/post-collection.model';
 
 // Generate all possible paths
 export async function getStaticPaths() {

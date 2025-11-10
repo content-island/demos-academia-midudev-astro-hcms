@@ -1,239 +1,290 @@
 # Server Streaming
 
-Si estamos en modo SSR, cuando pedimos una página, esta se genera en el servidor y se envía al usuario en un sólo paquete.
+## SSG SSR e Híbrido
 
-¿ Qué pasa si tenemos una páigna rica que carga de diferentes fuentes de datos? Puede que uno de los fragmentos tarde más en llegar que otro, lo que puede hacer que la página tarde en cargarse, y muchas veces lo que nos interesa es que la página se cargue lo más rápido posible.
+Hasta ahora hemos estado trabajando en modo SSG, es decir, Static Site Generation.
+Esto significa que Astro ejecuta tu código en tiempo de build y genera un sitio completamente estático, con archivos HTML ya listos para servir desde un CDN o un hosting estático.
 
-Una cosa interesante de Astro es que soporte streaming de HTML y de una forma muy sencilla e intituitiva.
+Pero Astro también soporta Server Side Rendering, o SSR, que consiste en generar la página cada vez que alguien la pide al servidor.
 
-## Manos a la obra
+Y lo mejor... es que Astro trabaja en un modo híbrido de forma nativa.
 
-Vamos a crear dos páginas, una tirara de streaming de HTML y otra no.
+**¿Que significa esto de modo híbrido?**
 
-_./src/pages/facts/NoStreaming.astro_
+Eso quiere decir que puedes tener:
 
-```astro
----
-import Layout from "../../layouts/Layout.astro";
----
+- Páginas que se generan una sola vez en el build (SSG).
 
-<Layout>
-  <h1>No Streaming</h1>
-</Layout>
+- Y otras páginas que se generan bajo demanda (SSR) cuando llega una petición.
+
+Con lo que sólo tienes que marcar las páginas que quieres servir de servidor con un flag (prerender a false), y con esto Astro no generará un archivo HTML estático para esa ruta en el build, sino que la renderizará en tiempo real cuando alguien la visite.
+
+Esto te permite optimizar el rendimiento: usar contenido estático cuando no cambia, y SSR solo donde necesitas datos frescos o contenido dinámico.
+
+## Creando el proyecto
+
+Vamos a poner toda esta teoría en práctica.
+
+Lo primero que vamos a hacer es crear un nuevo proyecto, esto es una oportunidad estupenda para que práctiques, intenta crear un proyecto en blanco por tu cuenta, repasa las guías de los primeros módulos, dale a la pausa e intentalo.
+
+Vamos con la solución.
+
+Primero, creamos un nuevo proyecto Astro:
+
+```bash
+npm create astro@latest
 ```
 
-_./src/pages/facts/Streaming.astro_
+Ahora queremos que nuestro proyecto soporte SSR, así que necesitamos añadir un adaptador de servidor.
+En este caso usaremos el de Node.js ¿Te acuerdas como hicimos eso? Dale a la pausa e intentalo.
 
-```astro
----
-import Layout from "../../layouts/Layout.astro";
+instalamos el adaptador de nodejs para astro:
 
-export const prerender = false;
----
-
-<Layout>
-  <h1>Streaming</h1>
-</Layout>
+```bash
+npm install @astrojs/node
 ```
 
-Y en nuestro menú de cabecera vamos a añadir enlaces para poder navegar entre ellas:
+Y lo añadimos al `astro.config.mjs`:
 
-_./src/components/Header.astro_
+_./astro.config.mjs_
 
 ```diff
-      <div class="menu__right">
-+       <li><a href="/facts/Streaming" class="menu__item">Streaming</a></li>
-+       <li><a href="/facts/NoStreaming" class="menu__item">No Streaming</a></li>
-        <li><a href="/" class="menu__item">All Post</a></li>
-        <li><a href="/about/" class="menu__item">About</a></li>
-      </div>
+// @ts-check
+import { defineConfig } from 'astro/config';
++ import node from '@astrojs/node';
 
+// https://astro.build/config
+export default defineConfig({
++  adapter: node({
++    mode: 'standalone',
++  }),
+});
 ```
 
-Probamos que podemos navegar entre las dos páginas.
+## Cargando imágenes dese la API
 
-Vamos al lio, creamos dos APIs simuladas, una que te de un datos sobre gatitos y otra sobre perritos, la de perritos le vamos a meter un delay de 5 segundos para simular que tarda más en llegar.
+Vamos a crear una pequeña API para obtener imágenes aleatorias de perros y gatos.
+Creamos una carpeta api dentro de `src` y un archivo `animal.api.ts`, esto puedes intentar sacarlo tú, animate, dale a la pausa e intentalo.
 
-_./src/pages/facts/cat-fact.api.ts_
+La solucíon:
+
+_./src/api/animal.api.ts_
 
 ```ts
-export async function getCatFact() {
-  return "Cats sleep 70% of their lives. 🐱";
+export async function getRandomDogImage(): Promise<string> {
+  const imageError =
+    "https://www.publicdomainpictures.net/pictures/190000/nahled/sad-dog-1468499671wYW.jpg";
+
+  const res = await fetch("https://dog.ceo/api/breeds/image/random");
+  const response: { message?: string } = await res.json();
+  return response?.message ?? imageError;
+}
+
+export async function getRandomCatImage(): Promise<string> {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const data: { url: string }[] = await res.json();
+  return data[0].url;
 }
 ```
 
-_./src/pages/facts/dog-fact.api.ts_
+## Mostrando las imágenes
 
-```ts
-export async function getDogFact() {
-  await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate 5s delay
-  return "Dogs can learn more than 1000 words. 🐶";
-}
+Ahora usamos esas funciones en nuestra página principal.
+
+_./src/index.astro_
+
+```astro
+---
+import {getRandomDogImage, getRandomCatImage} from '../animal.api.ts';
+
+const dogImage = await getRandomDogImage();
+const catImage = await getRandomCatImage();
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Dog and Cat Images</title>
+  </head>
+  <body>
+    <h1>🐶 Random Dog Image</h1>
+    <img
+      src={dogImage}
+      style="max-width: 400px"
+    />
+
+    <h1>🐱 Random Cat Image</h1>
+    <img
+      src={catImage}
+      style="max-width: 400px"
+    />
+  </body>
+</html>
 ```
 
-Vamos a consumir esta API en nuestra página sin streaming:
+Si hacemos un build, veremos que Astro genera un HTML estático (miramos la carpeta `dist`).
 
-_./src/pages/facts/NoStreaming.astro_
+Ahora convertimos esta página en SSR añadiendo una línea:
+
+_./src/index.astro_
 
 ```diff
 ---
-import Layout from "../../layouts/Layout.astro";
-+ import { getCatFact } from "./cat-fact.api";
-+ import { getDogFact } from "./dog-fact.api";
-+
-+ // IMPORTANTE, AQUI DECIMOS QUE VAMOS EN MODO SSR
-+ // HIBRIDO
 + export const prerender = false;
-+
-+ const catFact = await getCatFact();
-+ const dogFact = await getDogFact();
+const dogImage = await getRandomDogImage();
+const catImage = await getRandomCatImage();
 ---
-
-<Layout>
-  <h1>No Streaming</h1>
-+  <h2>Cat Fact</h2>
-+  <p>{catFact}</p>
-+  <h2>Dog Fact</h2>
-+  <p>{dogFact}</p>
-</Layout>
 ```
 
-Si probamos a navegar a esta página, veremos que tarda 5 segundos en cargar, ya que estamos esperando a que llegue el dato de los perritos.
+Si volvemos a hacer el build, ya no se generará un HTML estático:
+Astro creará un módulo en `dist/server/pages/_index.astro` que renderiza el HTML en cada petición.
 
-Vamos a hacer lo mismo en la página de streaming:
+## Simulando una respuesta lenta
 
-Para ello vamos a romper en componentes la sección que muestra los datos de los gatitos y los perritos:
+Vamos a simular que la carga del gato es lenta (ya sabes, los gatos van a su ritmo 😸).
 
-_./src/pages/facts/components/CatFact.astro_
+```diff
+export async function getRandomCatImage(): Promise<string> {
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  const data: { url: string }[] = await res.json();
+
++  // ⏳ Add a 5-second delay
++  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  return data[0].url;
+}
+```
+
+Si recargas la página, verás que todo tarda más en aparecer: hasta que el fetch del gato termina, no se muestra nada.
+
+Y aquí es donde entra en juego el server streaming.
+
+## Qué es el Server Streaming
+
+En modo SSR, Astro puede enviar el HTML por partes, esto se llama HTML streaming.
+
+La idea es que el servidor no espere a renderizar todo para enviar la respuesta:
+puede empezar a mandar el contenido que ya está listo (por ejemplo, el título o la imagen del perro),
+mientras los componentes más lentos se generan en segundo plano.
+
+Así el usuario ve algo antes, y la página parece mucho más rápida.
+
+## Componentizando el ejemplo
+
+Vamos a dividir nuestra página en dos componentes:
+
+_./src/components/dog.astro_
 
 ```astro
 ---
-import { getCatFact } from "../cat-fact.api";
-
-export const prerender = false;
-
-const fact = await getCatFact();
+import {getRandomDogImage} from '../api/animal.api';
+const dogImage = await getRandomDogImage();
 ---
-
-<section>
-  <h2>Cat Fact</h2>
-  <p>{fact}</p>
-</section>
+<h1>🐶 Random Dog Image</h1>
+<img
+  src={dogImage}
+  style="max-width: 400px"
+/>
 ```
 
-_./src/pages/facts/components/DogFact.astro_
+_./src/components/cat.astro_
 
 ```astro
 ---
-import { getDogFact } from "../dog-fact.api";
-
-export const prerender = false;
-
-const fact = await getDogFact();
+import { getRandomCatImage} from '../api/animal.api';
+const catImage = await getRandomCatImage();
 ---
 
-<section>
-  <h2>Dog Fact</h2>
-  <p>{fact}</p>
-</section>
+<h1>🐱 Random Cat Image</h1>
+<img
+  src={catImage}
+  style="max-width: 400px"
+/>
 ```
 
-Y ahora lo usamos tal cual en la página de streaming:
+Y lo usamos en la página.
 
-_./src/pages/facts/Streaming.astro_
+_./src/index.astro_
 
 ```diff
 ---
-import Layout from "../../layouts/Layout.astro";
-+ import CatFact from "./components/CatFact.astro";
-+ import DogFact from "./components/DogFact.astro";
-
 export const prerender = false;
++ import Dog from '../components/dog.astro';
++ import Cat from '../components/cat.astro';
+- import {getRandomDogImage, getRandomCatImage} from '../api/animal.api';
+- const dogImage = await getRandomDogImage();
+- const catImage = await getRandomCatImage();
 ---
 
-<Layout>
-  <h2>Streaming</h2>
-+ <CatFact />
-+ <DogFact />
-</Layout>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Dog and Cat Images</title>
+  </head>
+  <body>
++    <Dog/>
++    <Cat/>
+-    <h1>🐶 Random Dog Image</h1>
+-    <img
+-      src={dogImage}
+-      style="max-width: 400px"
+-    />
+-
+-    <h1>🐱 Random Cat Image</h1>
+-    <img
+-      src={catImage}
+-      style="max-width: 400px"
+-    />
+  </body>
+</html>
 ```
 
-Lo probamos y podemos ver como la página se carga al instante, y los datos de los gatitos llegan antes que los de los perritos.
+## Magia del streaming (sin hacer nada extra)
 
-## BONUS
+Si probamos esto, verás que la imagen del perro aparece enseguida,
+y la del gato se carga unos segundos después.
 
-¿Y si queremos mostrar un loader de la sección que se está cargando?
+¿Y lo curioso?
+¡No hemos hecho nada especial!
 
-Aquí vamos a emplear un truco:
+Astro ya hace server streaming por defecto en SSR,
+y renderiza los componentes de forma asíncrona cuando puede.
 
-- Creamos un componente que tiene dos DIV hermanos.
-- El primero DIV se muestra mientras el segundo DVI no sea visibile (esto lo hacemos con un selector de CSS).
+## Controlando el streaming con server:defer
 
-Vamos a crear el component fallback:
+Ahora bien, en algunos casos —por ejemplo, si el layout o algún componente hace await antes del `<slot />` ese streaming puede quedar bloqueado.
 
-_./src/components/LoadingFallback.astro_
+Si queremos asegurarnos de que un componente no retrasa el envío inicial, podemos usar la directiva `server:defer.`
 
-```astro
----
-//https://codehater.blog/articles/zero-js-progressive-loading/
----
+Le decimos a Astro:
 
-<!-- LoadingFallback.astro -->
-<div class="contents fallback">
-  <slot name="fallback" />
-</div>
-<slot name="content" />
+“No esperes a renderizar este componente.
+Envíame el resto de la página y cuando esté listo, lo inyectas.”
 
-<style>
-  .fallback:has(+ *) {
-    display: none;
-  }
-</style>
-```
+Y además... `server:defer` nos permite añadir un indicador de que ese trozo de HTML se está cargando:
 
-Este componente está muy chulo, con un selector CSS mira si tiene un hermano y si lo tiene se oculta.
-
-Y vamos a usarlo en nuestra página de streaming:
-
-_./src/pages/facts/Streaming.astro_
 
 ```diff
----
-import Layout from "../../layouts/Layout.astro";
-import CatFact from "./components/CatFact.astro";
-import DogFact from "./components/DogFact.astro";
-+ import LoadingFallback from "../../components/LoadingFallback.astro";
-
-export const prerender = false;
----
-
-<Layout>
-  <h2>Streaming</h2>
-  <CatFact />
-+  <LoadingFallback>
-+   <div slot="fallback">🐶 Loading dog fact...</div>
--    <DogFact />
-+   <DogFact slot="content" />
-+   </LoadingFallback>
-</Layout>
+    <Dog/>
+-    <Cat/>
++    <Cat server:defer>
++			<div slot="fallback">
++  			<span style="color: green; font-size: 2.5rem;">🐱 Loading cat fact...</span>
++			</div>
++		</Cat>
+  </body>
 ```
 
-Y ya lo tenemos... :)
+## Resumen
 
-Otra opción es usar _server islands_, marcamos el componente como _server:defer_ y le añadimos un _fallback_
+- SSG: el HTML se genera en el build.
 
-_./src/pages/facts/components/DogFact.astro_
+- SSR: el HTML se genera en cada petición.
 
-```diff
-<Layout>
-  <h2>Streaming</h2>
-  <CatFact />
--  <LoadingFallback>
--    <div slot="fallback">🐶 Loading dog fact...</div>
--    <DogFact slot="content" />
--  </LoadingFallback>
-+  <DogFact server:defer>
-+    <div slot="fallback">🐶 Loading dog fact..</div>
-+  </DogFact>
-</Layout>
-```
+- Modo híbrido: Astro permite combinar ambos, sin configuración adicional.
+
+- `prerender = false`: marca una página para renderizarla dinámicamente (SSR).
+
+- Server streaming: Astro puede enviar el HTML por partes, acelerando el renderizado.
+
+- `server:defer`: fuerza que un componente se renderice de forma diferida y no bloquee el envío inicial.
