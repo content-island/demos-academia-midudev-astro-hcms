@@ -1,4 +1,4 @@
-# demos-academia-midudev-astro-hcms
+# Demos curso Academía MiduDev - Introducción a Astro + Headless CMS
 
 Guías y demos del curso Astro + Headless CMS publicado en la [Academia MiduDev](https://midu.dev/)
 
