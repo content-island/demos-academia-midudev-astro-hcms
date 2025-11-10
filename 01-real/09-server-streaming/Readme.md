@@ -95,7 +95,7 @@ _./src/index.astro_
 
 ```astro
 ---
-import {getRandomDogImage, getRandomCatImage} from '../animal.api.ts';
+import {getRandomDogImage, getRandomCatImage} from '../api/animal.api.ts';
 
 const dogImage = await getRandomDogImage();
 const catImage = await getRandomCatImage();
