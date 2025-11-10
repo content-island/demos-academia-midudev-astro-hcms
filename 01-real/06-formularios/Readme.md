@@ -233,17 +233,6 @@ _./src/pods/newsletter/components/newsletter-mini.astro_
 +</script>
 ```
 
-```ts
-<script>
-  import { handleSubmit } from '../newsletter.business';
-  const form = document.getElementById('newsletter-form-mini');
-
-  if (form && form instanceof HTMLFormElement) {
-    form.addEventListener('submit', e => handleSubmit(e));
-  }
-</script>
-````
-
 ¡Y eso es todo!
 
 Ahora tenemos un formulario de newsletter completamente funcional que usa **Astro Server Actions + Resend** para enviar correos electrónicos, lo mismo que hemos enviado un correo, podríamos haber utilizado un servicio externo para, por ejemplo, suscribir al usuario a una lista de correos.
