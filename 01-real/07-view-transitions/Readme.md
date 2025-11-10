@@ -29,7 +29,7 @@ Con solo esto, ya podrás notar que al navegar entre páginas hay una pequeña t
 
 Ahora que tenemos las transiciones configuradas, vamos a crear una.
 
-Usamos la directiva `transition:name` para especificar el nombre de la transición en los elementos que deben animarse durante la navegación.  
+Usamos la directiva `transition:name` para especificar el nombre de la transición en los elementos que deben animarse durante la navegación.
 En este caso, utilizaremos el título de la publicación como nombre de transición.
 
 Primero en el componente que muestra el detalle del post:
@@ -44,7 +44,7 @@ id="article-section-heading"
   >
 ```
 
-y despues en el componente que muestra la tarjeta del post en la lista de posts:
+y después en el componente que muestra la tarjeta del post en la lista de posts:
 
 _./src/pods/post-collection/components/post-card.astro_
 
@@ -59,7 +59,7 @@ Así cuando transicionemos de la lista de posts al detalle del post, el título 
 
 ## Paso 3: Corregir el problema con el modo oscuro
 
-Cuando usamos transiciones de vista, podemos encontrarnos con un problema relacionado con el **modo oscuro**, donde la transición no respeta el tema actual.  
+Cuando usamos transiciones de vista, podemos encontrarnos con un problema relacionado con el **modo oscuro**, donde la transición no respeta el tema actual.
 Para solucionarlo, necesitamos usar los eventos de Astro.
 
 Elimina el script anterior del cambio de tema (si lo tienes) y reemplázalo por el siguiente código en tu componente de encabezado:
@@ -124,5 +124,5 @@ _src/components/header.astro_
 + </script>
 ```
 
-Podemos hacer muchas más cosas con las **view transitions**, pero por ahora esto es suficiente para comenzar.  
+Podemos hacer muchas más cosas con las **view transitions**, pero por ahora esto es suficiente para comenzar.
 Puedes explorar más sobre este tema en la [documentación oficial de Astro](https://docs.astro.build/en/guides/view-transitions/).
