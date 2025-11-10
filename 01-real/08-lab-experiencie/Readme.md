@@ -16,7 +16,7 @@ Si ejecutamos el proyecto
 npm run dev
 ```
 
-Y hacemos clic en la página _About_, deberías ver una página vacía.
+Y hacemos click en la página _About_, deberías ver una página vacía.
 
 ![Marcador de posición de experiencia vacía](./content/empty-experience.jpg)
 
