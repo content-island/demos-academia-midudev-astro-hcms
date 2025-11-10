@@ -8,9 +8,9 @@ La idea es que cuando un usuario se suscriba a nuestra newsletter que recibamos 
 
 Como en el ejemplo anterior ya dejamos la configuración de server actions lista, sólo tenemos que centrarnos en implementar el formulario.
 
-Para enviar correos, podemos utilizar un sinfin de proveedores, en nuestro caso elegimos **Resend** que ofrece un plan gratuito.
+Para enviar correos, podemos utilizar un sinfín de proveedores, en nuestro caso elegimos **Resend** que ofrece un plan gratuito.
 
-El único paquete que hacer falta agregar es la librería de **Resend**:
+El único paquete que hace falta agregar es la librería de **Resend**:
 
 ```bash
 npm install resend
@@ -111,7 +111,7 @@ export const server = {
 
 ### Desglose rápido:
 
-- Validamos la entrada del formulario con Zod (para asegurarnos de que solo pasen correos válidos)
+- Validamos la entrada del formulario con Zod (para asegurarnos de que sólo pasen correos válidos)
 - Llamamos a Resend para enviar el correo
 - Devolvemos una respuesta simple de éxito o error para la interfaz de usuario
 
