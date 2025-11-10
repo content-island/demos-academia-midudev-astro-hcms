@@ -241,14 +241,11 @@ export const prerender = false;
 
 ## Magia del streaming (sin hacer nada extra)
 
-Si probamos esto, verás que la imagen del perro aparece enseguida,
-y la del gato se carga unos segundos después.
+Si probamos esto, verás que la imagen del perro aparece enseguida, y la del gato se carga unos segundos después.
 
-¿Y lo curioso?
-¡No hemos hecho nada especial!
+¿Y lo curioso? ¡No hemos hecho nada especial!
 
-Astro ya hace server streaming por defecto en SSR,
-y renderiza los componentes de forma asíncrona cuando puede.
+Astro ya hace server streaming por defecto en SSR, y renderiza los componentes de forma asíncrona cuando puede.
 
 ## Controlando el streaming con server:defer
 
@@ -258,8 +255,7 @@ Si queremos asegurarnos de que un componente no retrasa el envío inicial, podem
 
 Le decimos a Astro:
 
-“No esperes a renderizar este componente.
-Envíame el resto de la página y cuando esté listo, lo inyectas.”
+“No esperes a renderizar este componente. Envíame el resto de la página y cuando esté listo, lo inyectas.”
 
 Y además... `server:defer` nos permite añadir un indicador de que ese trozo de HTML se está cargando:
 
